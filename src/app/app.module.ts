@@ -27,6 +27,9 @@ import { DashboardComponent  } from './pages/dashboard/dashboard.component';
 
 // Servicios iParty
 import {ApiServices} from './services/api.services';
+import { NegociosComponent } from './pages/administrador/negocios/negocios.component';
+import { RegistrarNegocioComponent } from './pages/administrador/registrar-negocio/registrar-negocio.component';
+import { AdministradoresComponent } from './pages/administrador/administradores/administradores.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import {ApiServices} from './services/api.services';
     SpinnerComponent,
     ContentAnimateDirective,
     LoginComponent,
-    ForgetpasswordComponent
+    ForgetpasswordComponent,
+    NegociosComponent,
+    RegistrarNegocioComponent,
+    AdministradoresComponent
   ],
   imports: [
     BrowserModule,

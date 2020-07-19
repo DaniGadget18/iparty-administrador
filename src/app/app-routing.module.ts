@@ -3,13 +3,19 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import {LoginComponent} from './pages/login/login.component';
 import {ForgetpasswordComponent} from './pages/forgetpassword/forgetpassword.component';
+import {NegociosComponent} from './pages/administrador/negocios/negocios.component';
+import {RegistrarNegocioComponent} from './pages/administrador/registrar-negocio/registrar-negocio.component';
+import {AdministradoresComponent} from './pages/administrador/administradores/administradores.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'forgetpassword', component: ForgetpasswordComponent },
-  { path: 'dashboard', component: DashboardComponent }
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'administrador/negocios', component: NegociosComponent },
+  { path: 'administrador/registrarnegocio', component: RegistrarNegocioComponent },
+  { path: 'administrador/administradores', component: AdministradoresComponent },
   //{ path: 'dashboard', component: DashboardComponent },
   //{ path: 'basic-ui', loadChildren: () => import('./basic-ui/basic-ui.module').then(m => m.BasicUiModule) },
   //{ path: 'charts', loadChildren: () => import('./charts/charts.module').then(m => m.ChartsDemoModule) },

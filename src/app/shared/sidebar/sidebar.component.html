@@ -4,7 +4,7 @@
       <a href="javascript:;" class="nav-link">
         <div class="nav-profile-image">
           <img src="assets/images/faces/face1.jpg" alt="profile">
-          <span class="login-status online"></span> <!--change to offline or busy as needed-->              
+          <span class="login-status online"></span> <!--change to offline or busy as needed-->
         </div>
         <div class="nav-profile-text">
           <span class="font-weight-bold mb-2">David Grey. H</span>
@@ -17,6 +17,12 @@
       <a class="nav-link" routerLink="/dashboard" routerLinkActive #dashboard="routerLinkActive">
         <span class="menu-title">Dashboard</span>
         <i class="mdi mdi-home menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item" routerLinkActive="active">
+      <a class="nav-link" routerLink="/informacion">
+        <span class="menu-title">Informacion</span>
+        <i class="mdi mdi-wrench menu-icon"></i>
       </a>
     </li>
     <li class="nav-item" [ngClass]="{'active' : accordions.isActive || buttons.isActive || badges.isActive || breadcrumbs.isActive || dropdowns.isActive || modals.isActive || notifications.isActive || progressbar.isActive || pagination.isActive || tabs.isActive || typography.isActive || tooltips.isActive }">
