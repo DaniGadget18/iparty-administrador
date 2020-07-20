@@ -1,0 +1,62 @@
+<div class="page-header">
+  <h3 class="page-title">
+    <span class="page-title-icon bg-gradient-primary text-white mr-2">
+      <i class="mdi mdi-domain"></i>
+    </span>
+    Registrar negocio
+  </h3>
+</div>
+<div class="row">
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <form (ngSubmit)="registrarNegocio(f)"  #f='ngForm' >
+          <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Datos Bar / Antro</h4>
+                  <div class="form-group">
+                    <label for="nombre">Nombre Bar / Antro</label>
+                    <input type="text" [(ngModel)]="negocio.nombre" class="form-control" id="nombre" name="nombre" placeholder="Nombre bar / antro">
+                  </div>
+                  <div class="form-group">
+                    <label for="ubicacion">Direccion:</label>
+                    <input type="text" [(ngModel)]="negocio.ubicacion" class="form-control" id="ubicacion" name="ubicacion" placeholder="Direccion del bar">
+                  </div>
+                  <div class="form-group">
+                    <label for="id_categoria">Categoria:</label>
+                    <select [(ngModel)]="negocio.idcategoria" class="form-control" id="id_categoria" name="id_categoria">
+                      <option value="2">Antro</option>
+                      <option value="1">Bar</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Datos administrador</h4>
+                  <div class="form-group">
+                    <label for="email">Email administrador</label>
+                    <input type="email" [(ngModel)]="usuario.email" class="form-control" id="email" name='email' placeholder="Escribe email del administrador">
+                  </div>
+                  <div class="form-group">
+                    <label for="nomAdmin">Nombre:</label>
+                    <input type="text" [(ngModel)]="usuario.nombre" class="form-control" id="nomAdmin" name="nomAdmin" placeholder="Nombre del administrador">
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Contrasena:</label>
+                    <input type="password" [(ngModel)]="usuario.password" class="form-control" id="password" name="password" placeholder="Escribe una contrasena">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-gradient-success float-right"> Registrar </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

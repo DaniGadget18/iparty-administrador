@@ -23,13 +23,15 @@ import { TodoListComponent } from './apps/todo-list/todo-list.component';
 // Componentes  iParty
 import { LoginComponent } from './pages/login/login.component';
 import { ForgetpasswordComponent } from './pages/forgetpassword/forgetpassword.component';
-import { DashboardComponent  } from './pages/dashboard/dashboard.component';
+import { DashboardComponent  } from './pages/administrador/dashboard/dashboard.component';
 
 // Servicios iParty
 import {ApiServices} from './services/api.services';
-import { NegociosComponent } from './pages/administrador/negocios/negocios.component';
-import { RegistrarNegocioComponent } from './pages/administrador/registrar-negocio/registrar-negocio.component';
-import { AdministradoresComponent } from './pages/administrador/administradores/administradores.component';
+import { NegociosComponent } from './pages/AdministradorRoot/negocios/negocios.component';
+import { RegistrarNegocioComponent } from './pages/AdministradorRoot/registrar-negocio/registrar-negocio.component';
+import { AdministradoresComponent } from './pages/AdministradorRoot/administradores/administradores.component';
+import { InformacionNegocioComponent } from './pages/AdministradorRoot/informacion-negocio/informacion-negocio.component';
+import { InformacionComponent } from './pages/administrador/informacion/informacion.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { AdministradoresComponent } from './pages/administrador/administradores/
     ForgetpasswordComponent,
     NegociosComponent,
     RegistrarNegocioComponent,
-    AdministradoresComponent
+    AdministradoresComponent,
+    InformacionNegocioComponent,
+    InformacionComponent
   ],
   imports: [
     BrowserModule,
