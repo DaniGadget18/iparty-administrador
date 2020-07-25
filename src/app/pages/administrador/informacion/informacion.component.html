@@ -7,98 +7,58 @@
   </h3>
 </div>
 <div class="row">
-  <div class="col-lg-12 grid-margin stretch-card">
+  <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
-        <form (ngSubmit)="(f)"  #f='ngForm' >
+        <form (ngSubmit)="actulizarInfoNegocio(f)" #f='ngForm'>
           <div class="row">
-            <div class="col-md-6 grid-margin stretch-card">
+            <div class="col-md-6">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Datos Bar / Antro</h4>
                   <div class="form-group">
                     <label for="nombre">Nombre Bar / Antro</label>
-                    <input type="text"  class="form-control" id="nombre" name="nombre" placeholder="Nombre bar / antro">
+                    <input [disabled]="true" type="text" [(ngModel)]="negocio.nombre" class="form-control" id="nombre" name="nombre"
+                           placeholder="Nombre bar / antro">
                   </div>
                   <div class="form-group">
                     <label for="ubicacion">Direccion:</label>
-                    <input type="text"  class="form-control" id="ubicacion" name="ubicacion" placeholder="Direccion del bar">
+                    <input type="text" [(ngModel)]="negocio.ubicacion" class="form-control" id="ubicacion"
+                           name="ubicacion" placeholder="Direccion del bar">
                   </div>
                   <div class="form-group">
                     <label for="id_categoria">Categoria:</label>
-                    <select  class="form-control" id="id_categoria" name="id_categoria">
+                    <select [(ngModel)]="negocio.idcategoria" class="form-control" id="id_categoria"
+                            name="id_categoria">
                       <option value="2">Antro</option>
                       <option value="1">Bar</option>
                     </select>
                   </div>
                   <div class="form-group">
                     <label for="informacion">Informacion:</label>
-                    <textarea class="form-control" id="informacion" name="informacion" placeholder="Escribe una breve descripcion del lugar"></textarea>
+                    <textarea [(ngModel)]="negocio.informacion" class="form-control" id="informacion"
+                              name="informacion" placeholder="Escribe una breve descripcion del lugar"></textarea>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Horarios: </h4>
-                  <div class="form-group row">
-                    <label for="Lunes" class="col-sm-4 col-form-label">Lunes</label>
-                    <div class="col-sm-3">
-                      <input type="text" class="form-control" id="lunes-inicio" placeholder="19:00">
-                    </div>
-                    <div class="col-sm-3">
-                      <input type="text" class="form-control" id="lunes-fin" placeholder="2:00">
-                    </div>
-                    <label for="Martes" class="col-sm-4 col-form-label">Martes</label>
-                    <div class="col-sm-3">
-                      <input type="text" class="form-control" id="Martes-inicio" placeholder="19:00">
-                    </div>
-                    <div class="col-sm-3">
-                      <input type="text" class="form-control" id="Martes-fin" placeholder="2:00">
-                    </div>
-                    <label for="Miercoles" class="col-sm-4 col-form-label">Miercoles</label>
-                    <div class="col-sm-3">
-                      <input type="text" class="form-control" id="Miercoles-inicio" placeholder="19:00">
-                    </div>
-                    <div class="col-sm-3">
-                      <input type="text" class="form-control" id="Miercoles-fin" placeholder="2:00">
-                    </div>
-                    <label for="Jueves" class="col-sm-4 col-form-label">Jueves</label>
-                    <div class="col-sm-3">
-                      <input type="text" class="form-control" id="Jueves-inicio" placeholder="19:00">
-                    </div>
-                    <div class="col-sm-3">
-                      <input type="text" class="form-control" id="Jueves-fin" placeholder="2:00">
-                    </div>
-                    <label for="Viernes" class="col-sm-4 col-form-label">Viernes</label>
-                    <div class="col-sm-3">
-                      <input type="text" class="form-control" id="Viernes-inicio" placeholder="19:00">
-                    </div>
-                    <div class="col-sm-3">
-                      <input type="text" class="form-control" id="Viernes-fin" placeholder="2:00">
-                    </div>
-                    <label for="Sabado" class="col-sm-4 col-form-label">Sabado</label>
-                    <div class="col-sm-3">
-                      <input type="text" class="form-control" id="Sabado-inicio" placeholder="19:00">
-                    </div>
-                    <div class="col-sm-3">
-                      <input type="text" class="form-control" id="Sabado-fin" placeholder="2:00">
-                    </div>
-                    <label for="Domingo" class="col-sm-4 col-form-label">Domingo</label>
-                    <div class="col-sm-3">
-                      <input type="text" class="form-control" id="Domingo-inicio" placeholder="19:00">
-                    </div>
-                    <div class="col-sm-3">
-                      <input type="text" class="form-control" id="Domingo-fin" placeholder="2:00">
-                    </div>
-
-                  </div>
+            <div class="col-6">
+              <div class="card-body">
+                <h4>Ubicacion del negocio</h4>
+                <div class="form-group">
+                  <label for="latitud">Latitud:</label>
+                  <input type="number" [(ngModel)]="negocio.lat" class="form-control" id="latitud"
+                         name="latitud">
                 </div>
+                <div class="form-group">
+                  <label for="longitud">Longitud:</label>
+                  <input type="number" [(ngModel)]="negocio.lng" class="form-control" id="longitud"
+                         name="longitud">
+                </div>
+                <button type="submit" class="btn btn-gradient-info btn-block">Editar informacion</button>
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-gradient-warning float-right"> Registrar </button>
         </form>
       </div>
     </div>

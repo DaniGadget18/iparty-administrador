@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "iparty-5093b": {
+      "hosting": {
+        "demo1": [
+          "iparty-5093b"
+        ]
+      }
+    }
+  }
+}

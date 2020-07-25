@@ -20,6 +20,10 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { ContentAnimateDirective } from './shared/directives/content-animate.directive';
 import { TodoListComponent } from './apps/todo-list/todo-list.component';
 
+// Modulo firebase
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+
 // Componentes  iParty
 import { LoginComponent } from './pages/login/login.component';
 import { ForgetpasswordComponent } from './pages/forgetpassword/forgetpassword.component';
@@ -32,6 +36,18 @@ import { RegistrarNegocioComponent } from './pages/AdministradorRoot/registrar-n
 import { AdministradoresComponent } from './pages/AdministradorRoot/administradores/administradores.component';
 import { InformacionNegocioComponent } from './pages/AdministradorRoot/informacion-negocio/informacion-negocio.component';
 import { InformacionComponent } from './pages/administrador/informacion/informacion.component';
+import { MenuComponent } from './pages/administrador/menu/menu.component';
+import { ReservacionComponent } from './pages/administrador/reservacion/reservacion.component';
+import { ComentarioComponent } from './pages/administrador/comentario/comentario.component';
+import { EventoComponent } from './pages/administrador/evento/evento.component';
+import { MensajesComponent } from './pages/administrador/mensajes/mensajes.component';
+import { HorariosComponent } from './pages/administrador/horarios/horarios.component';
+import {ImageUploadModule} from 'angular2-image-upload';
+import {environment} from '../environments/environment';
+import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
+import { FotosComponent } from './pages/administrador/fotos/fotos.component';
+import {ApiFotosServices} from './services/fotos-api.services';
+import {AuthApiServices} from './services/auth.services';
 
 @NgModule({
   declarations: [
@@ -50,7 +66,15 @@ import { InformacionComponent } from './pages/administrador/informacion/informac
     RegistrarNegocioComponent,
     AdministradoresComponent,
     InformacionNegocioComponent,
-    InformacionComponent
+    InformacionComponent,
+    MenuComponent,
+    ReservacionComponent,
+    ComentarioComponent,
+    EventoComponent,
+    MensajesComponent,
+    HorariosComponent,
+    NgDropFilesDirective,
+    FotosComponent
   ],
   imports: [
     BrowserModule,
@@ -60,10 +84,14 @@ import { InformacionComponent } from './pages/administrador/informacion/informac
     FormsModule,
     ReactiveFormsModule,
     ChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule
   ],
   providers: [
-    ApiServices
+    ApiServices,
+    ApiFotosServices,
+    AuthApiServices,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,8 +1,14 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+      "baseUrl": ".",
+      "paths": { "*": ["types/*"] },
+      "baseUrl": ".",
+      "paths": { "*": ["types/*"] },
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [
+      "node"
+    ]
   },
   "angularCompilerOptions": {
     "preserveWhitespaces": true //Not working in angular 8.1.1

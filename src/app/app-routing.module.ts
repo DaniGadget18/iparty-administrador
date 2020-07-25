@@ -8,6 +8,13 @@ import {RegistrarNegocioComponent} from './pages/AdministradorRoot/registrar-neg
 import {AdministradoresComponent} from './pages/AdministradorRoot/administradores/administradores.component';
 import {InformacionNegocioComponent} from './pages/AdministradorRoot/informacion-negocio/informacion-negocio.component';
 import {InformacionComponent} from './pages/administrador/informacion/informacion.component';
+import {MenuComponent} from './pages/administrador/menu/menu.component';
+import {ReservacionComponent} from './pages/administrador/reservacion/reservacion.component';
+import {ComentarioComponent} from './pages/administrador/comentario/comentario.component';
+import {EventoComponent} from './pages/administrador/evento/evento.component';
+import {MensajesComponent} from './pages/administrador/mensajes/mensajes.component';
+import {HorariosComponent} from './pages/administrador/horarios/horarios.component';
+import {FotosComponent} from './pages/administrador/fotos/fotos.component';
 
 
 const routes: Routes = [
@@ -16,10 +23,17 @@ const routes: Routes = [
   { path: 'forgetpassword', component: ForgetpasswordComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'informacion', component: InformacionComponent },
+  { path: 'horarios', component: HorariosComponent },
+  { path: 'fotos', component: FotosComponent },
+  { path: 'menu', component: MenuComponent },
+  { path: 'reservacion', component: ReservacionComponent },
+  { path: 'comentarios', component: ComentarioComponent },
+  { path: 'eventos', component: EventoComponent },
+  { path: 'mensajes', component: MensajesComponent },
   { path: 'administrador/negocios', component: NegociosComponent },
   { path: 'administrador/registrarnegocio', component: RegistrarNegocioComponent },
   { path: 'administrador/administradores', component: AdministradoresComponent },
-  { path: 'administrador/negocio/informacion', component: InformacionNegocioComponent },
+  { path: 'administrador/negocio/informacion/:id', component: InformacionNegocioComponent },
   //{ path: 'dashboard', component: DashboardComponent },
   //{ path: 'basic-ui', loadChildren: () => import('./basic-ui/basic-ui.module').then(m => m.BasicUiModule) },
   //{ path: 'charts', loadChildren: () => import('./charts/charts.module').then(m => m.ChartsDemoModule) },

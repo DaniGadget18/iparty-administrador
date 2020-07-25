@@ -4,4 +4,6 @@ export class NegocioModel {
   ubicacion: string;
   informacion: string;
   idcategoria: any;
+  lat: any;
+  lng: any;
 }

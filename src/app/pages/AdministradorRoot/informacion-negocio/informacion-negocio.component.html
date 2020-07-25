@@ -17,25 +17,25 @@
                 <h3> Nombre: </h3>
               </div>
               <div class="col-6">
-                <h3> Ritter </h3>
+                <h3> {{informacion.nombre}} </h3>
               </div>
               <div class="col-6 mt-3">
                 <h3> Direccion: </h3>
               </div>
               <div class="col-12">
-                <h3> Avenida avenida avenida </h3>
+                <h3> {{informacion.ubicacion || 'Null'}} </h3>
               </div>
               <div class="col-6 mt-3">
                 <h3> Categoria: </h3>
               </div>
               <div class="col-6 mt-3">
-                <h3> Bar </h3>
+                <h3> {{informacion['categoria_negocio'].categoria || 'Null'}} </h3>
               </div>
               <div class="col-6 mt-4">
                 <h3> Administrador: </h3>
               </div>
               <div class="col-12">
-                <h3> daniel@utt.edu.mx </h3>
+                <h3> {{informacion['usuario'][0].email || 'Null'}} </h3>
               </div>
             </div>
           </div>

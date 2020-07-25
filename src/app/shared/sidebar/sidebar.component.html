@@ -10,67 +10,74 @@
           <span class="font-weight-bold mb-2">{{email}}</span>
           <span class="text-secondary text-small">Administrador</span>
         </div>
-
       </a>
     </li>
     <li *ngIf="dashboard" class="nav-item" routerLinkActive="active">
       <a class="nav-link" routerLink="/dashboard">
         <span class="menu-title">Dashboard</span>
-        <i class="mdi mdi-wrench menu-icon"></i>
+        <i class="mdi mdi-home menu-icon"></i>
       </a>
     </li>
-    <li *ngIf="informacion" class="nav-item" routerLinkActive="active">
-      <a class="nav-link" routerLink="/informacion">
-        <span class="menu-title">Informacion</span>
+    <li class="nav-item">
+      <a class="nav-link" (click)="uiBasicCollapsed = !uiBasicCollapsed" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
+        <span class="menu-title">Negocio</span>
+        <i class="menu-arrow"></i>
         <i class="mdi mdi-wrench menu-icon"></i>
       </a>
+      <div class="collapse" id="ui-basic" [ngbCollapse]="!uiBasicCollapsed">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" routerLink="/informacion" routerLinkActive="active">Informacion</a></li>
+          <li class="nav-item"> <a class="nav-link" routerLink="/horarios" routerLinkActive="active">Horarios</a></li>
+          <li class="nav-item"> <a class="nav-link" routerLink="/fotos" routerLinkActive="active">Fotos</a></li>
+        </ul>
+      </div>
     </li>
     <li *ngIf="productos" class="nav-item" routerLinkActive="active">
-      <a class="nav-link" routerLink="/informacion">
-        <span class="menu-title">Productos</span>
-        <i class="mdi mdi-wrench menu-icon"></i>
+      <a class="nav-link" routerLink="/menu">
+        <span class="menu-title">Menu</span>
+        <i class="mdi mdi-plus-box menu-icon"></i>
       </a>
     </li>
     <li *ngIf="reservaciones" class="nav-item" routerLinkActive="active">
-      <a class="nav-link" routerLink="/informacion">
+      <a class="nav-link" routerLink="/reservacion">
         <span class="menu-title">Reservaciones</span>
-        <i class="mdi mdi-wrench menu-icon"></i>
+        <i class="mdi mdi-account-card-details menu-icon"></i>
       </a>
     </li>
     <li *ngIf="comentarios" class="nav-item" routerLinkActive="active">
-      <a class="nav-link" routerLink="/informacion">
+      <a class="nav-link" routerLink="/comentarios">
         <span class="menu-title">Comentarios</span>
-        <i class="mdi mdi-wrench menu-icon"></i>
+        <i class="mdi mdi-format-list-bulleted menu-icon"></i>
       </a>
     </li>
     <li *ngIf="mensajes" class="nav-item" routerLinkActive="active">
-      <a class="nav-link" routerLink="/informacion">
+      <a class="nav-link" routerLink="/mensajes">
         <span class="menu-title">Mensajes</span>
-        <i class="mdi mdi-wrench menu-icon"></i>
+        <i class="mdi mdi-message-text menu-icon"></i>
       </a>
     </li>
     <li *ngIf="eventos" class="nav-item" routerLinkActive="active">
-      <a class="nav-link" routerLink="/informacion">
+      <a class="nav-link" routerLink="/eventos">
         <span class="menu-title">Eventos</span>
-        <i class="mdi mdi-wrench menu-icon"></i>
+        <i class="mdi mdi-calendar menu-icon"></i>
       </a>
     </li>
     <li *ngIf="negocios" class="nav-item" routerLinkActive="active">
       <a class="nav-link" routerLink="/administrador/negocios">
         <span class="menu-title">Negocios</span>
-        <i class="mdi mdi-wrench menu-icon"></i>
+        <i class="mdi mdi-domain menu-icon"></i>
       </a>
     </li>
     <li *ngIf="registrarNegocio" class="nav-item" routerLinkActive="active">
       <a class="nav-link" routerLink="/administrador/registrarnegocio">
         <span class="menu-title">Registrar negocios</span>
-        <i class="mdi mdi-wrench menu-icon"></i>
+        <i class="mdi mdi-plus-box menu-icon"></i>
       </a>
     </li>
     <li *ngIf="administradores" class="nav-item" routerLinkActive="active">
       <a class="nav-link" routerLink="/administrador/administradores">
         <span class="menu-title">Administradores Iparty</span>
-        <i class="mdi mdi-wrench menu-icon"></i>
+        <i class="mdi mdi-account-key menu-icon"></i>
       </a>
     </li>
   </ul>
