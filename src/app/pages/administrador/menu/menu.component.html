@@ -5,15 +5,18 @@
     </span>
     Menu - negocio
   </h3>
-  <button class="btn btn-gradient-success float-right">Agregar</button>
+  <button routerLink="/menu/registrar" class="btn btn-gradient-success float-right">Agregar</button>
 </div>
 <div class="row">
   <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
         <div class="row">
-          <div class="col-md-12 grid-margin stretch-card">
-            <div class="table-responsive">
+          <div class="col-md-12">
+            <div *ngIf="menu.length == 0" class="alert alert-info">
+              <h4>Aun no hay productos registrados</h4>
+            </div>
+            <div *ngIf="menu.length > 0" class="table-responsive">
               <table class="table table-striped">
                 <thead>
                 <tr>
@@ -21,14 +24,19 @@
                   <th>Nombre</th>
                   <th>Informacion</th>
                   <th>Categoria</th>
+                  <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Cerveza</td>
-                  <td>Bebida con alcohol fria</td>
-                  <td>Bebidas</td>
+                <tr *ngFor="let menu of menu; let i = index;">
+                  <td>{{menu.id}}</td>
+                  <td>{{menu.nombre}}</td>
+                  <td>{{menu.informacion}}</td>
+                  <td>{{menu['categoria'].nombre}}</td>
+                  <td>
+                    <button (click)="editarProducto(menu.id)" class="badge badge-warning mr-2"> Editar </button>
+                    <button (click)="eliminarProducto(menu.id, i)" class="badge badge-danger" > Eliminar </button>
+                  </td>
                 </tr>
                 </tbody>
               </table>

@@ -3,6 +3,7 @@ import {HorarioModel} from '../../../models/horario.model';
 import {ApiServices} from '../../../services/api.services';
 import {NgForm} from '@angular/forms';
 import {NegocioModel} from '../../../models/negocio.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-horarios',
@@ -29,8 +30,22 @@ export class HorariosComponent implements OnInit {
     this.horario.sabado = form.value.sabado_inicio + '-' + form.value.sabado_fin;
     this.horario.domingo = form.value.domingo_inicio + '-' + form.value.domingo_fin;
 
+    return this.apiservices.actualizarHorariosNegocio(this.horario).subscribe( (resp: any) => {
+      Swal.fire({
+        icon: 'success',
+        title: resp.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }, (error) => {
+      Swal.fire({
+        icon: 'error',
+        title: error.error.error,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    });
 
-    this.apiservices.actualizarNegocio(this.negocio, this.horario);
   }
 
 }

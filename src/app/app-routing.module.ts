@@ -15,6 +15,7 @@ import {EventoComponent} from './pages/administrador/evento/evento.component';
 import {MensajesComponent} from './pages/administrador/mensajes/mensajes.component';
 import {HorariosComponent} from './pages/administrador/horarios/horarios.component';
 import {FotosComponent} from './pages/administrador/fotos/fotos.component';
+import {RegistarMenuComponent} from './pages/administrador/registar-menu/registar-menu.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,8 @@ const routes: Routes = [
   { path: 'horarios', component: HorariosComponent },
   { path: 'fotos', component: FotosComponent },
   { path: 'menu', component: MenuComponent },
+  { path: 'menu/registrar', component: RegistarMenuComponent },
+  { path: 'menu/registrar/:id', component: RegistarMenuComponent },
   { path: 'reservacion', component: ReservacionComponent },
   { path: 'comentarios', component: ComentarioComponent },
   { path: 'eventos', component: EventoComponent },

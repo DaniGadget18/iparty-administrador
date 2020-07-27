@@ -48,6 +48,8 @@ import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 import { FotosComponent } from './pages/administrador/fotos/fotos.component';
 import {ApiFotosServices} from './services/fotos-api.services';
 import {AuthApiServices} from './services/auth.services';
+import {ApiRootServices} from './services/api-Root.services';
+import { RegistarMenuComponent } from './pages/administrador/registar-menu/registar-menu.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,8 @@ import {AuthApiServices} from './services/auth.services';
     MensajesComponent,
     HorariosComponent,
     NgDropFilesDirective,
-    FotosComponent
+    FotosComponent,
+    RegistarMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -92,6 +95,7 @@ import {AuthApiServices} from './services/auth.services';
     ApiServices,
     ApiFotosServices,
     AuthApiServices,
+    ApiRootServices
   ],
   bootstrap: [AppComponent]
 })

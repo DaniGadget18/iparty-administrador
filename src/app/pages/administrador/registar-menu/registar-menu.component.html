@@ -1,0 +1,50 @@
+<div class="page-header">
+  <h3 class="page-title">
+    <span class="page-title-icon bg-gradient-primary text-white mr-2">
+      <i class="mdi mdi-plus-box"></i>
+    </span>
+    {{title}}
+  </h3>
+  <button routerLink="/menu" class="btn btn-gradient-success float-right">Regresar</button>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <form (ngSubmit)="cargarInformacion(f)" #f='ngForm'>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Datos del producto</h4>
+                  <div class="form-group">
+                    <label for="nombre">Nombre del producto</label>
+                    <input type="text" [(ngModel)]="menu.nombre" class="form-control" id="nombre" name="nombre"
+                           placeholder="Nombre del producto">
+                  </div>
+                  <div class="form-group">
+                    <label for="informacion">Informacion del producto:</label>
+                    <textarea [(ngModel)]="menu.informacion" class="form-control" id="informacion"
+                              name="informacion" placeholder="Escribe una breve descripcion del producto"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card-body">
+                <h4>Categoria del producto:</h4>
+                <div *ngFor="let categoria of categorias; let i = index;" class="form-check">
+                  <input class="form-check-input" [(ngModel)]="menu.idcategoriamenu" type="radio" name="categorias" id="{{i}}" value="{{categoria.id}}">
+                  <label class="form-check-label" for="{{i}}">
+                    {{categoria.nombre}}
+                  </label>
+                </div>
+                <button type="submit" class="btn btn-gradient-info btn-block">{{btnString}}</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
