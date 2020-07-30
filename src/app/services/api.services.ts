@@ -14,17 +14,6 @@ export class ApiServices {
   constructor( private httpclient: HttpClient) {
   }
 
-  registrarNegocio( negocio: NegocioModel, usuario: UsuarioModel ) {
-    const data = {
-      nombre: negocio.nombre,
-      nombreAdmin: usuario.nombre,
-      fecha_nacimiento: usuario.fecha_nacimiento,
-      email: usuario.email,
-      password: usuario.password
-    };
-    return this.httpclient.post(`${this.url}/negocio/registrarNegocio`, data);
-  }
-
   obtenerInfoNegocio(usuario: UsuarioModel) {
     const data = {
       email: usuario.email
@@ -93,6 +82,36 @@ export class ApiServices {
       id
     };
     return this.httpclient.post(`${this.url}/negocio/eliminarProducto`, data);
+  }
+
+  obtenerComentarios() {
+    const data = {
+      email: localStorage.getItem('email')
+    };
+    return this.httpclient.post(`${this.url}/negocio/comentarios`, data);
+  }
+
+  obtenerComentariosRank( rank: number ) {
+    const data = {
+      email: localStorage.getItem('email'),
+      rank
+    };
+    return this.httpclient.post(`${this.url}/negocio/comentariosranked`, data);
+  }
+
+  obtenerEventos() {
+    const data = {
+      email: localStorage.getItem('email')
+    };
+    return this.httpclient.post(`${this.url}/negocio/obtenerEventos`, data);
+  }
+
+  obtenerEventosFecha( fecha: string) {
+    const data = {
+      email: localStorage.getItem('email'),
+      fecha
+    };
+    return this.httpclient.post(`${this.url}/negocio/obtenerEventosFecha`, data);
   }
 
 

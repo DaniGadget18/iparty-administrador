@@ -50,6 +50,7 @@ export class InformacionComponent implements OnInit {
 
   actulizarInfoNegocio(form: NgForm) {
     this.apiservices.actualizarNegocio(this.negocio).subscribe( (resp: any ) => {
+      console.log(resp);
       Swal.fire({
         icon: 'success',
         title: resp.message,
@@ -57,6 +58,7 @@ export class InformacionComponent implements OnInit {
         timer: 1500
       });
     }, error => {
+      console.log(error);
       Swal.fire({
         icon: 'error',
         title: 'Ocurrio un error en el sistema' + error.error.message,

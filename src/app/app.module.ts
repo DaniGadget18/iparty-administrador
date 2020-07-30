@@ -50,6 +50,7 @@ import {ApiFotosServices} from './services/fotos-api.services';
 import {AuthApiServices} from './services/auth.services';
 import {ApiRootServices} from './services/api-Root.services';
 import { RegistarMenuComponent } from './pages/administrador/registar-menu/registar-menu.component';
+import {ChatService} from './services/chat.services';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { RegistarMenuComponent } from './pages/administrador/registar-menu/regis
     ApiServices,
     ApiFotosServices,
     AuthApiServices,
-    ApiRootServices
+    ApiRootServices,
+    ChatService
   ],
   bootstrap: [AppComponent]
 })

@@ -18,23 +18,41 @@
               <div class="row">
                 <div class="col-6">
                   <div class="form-group row">
-                    <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Fecha:</label>
+                    <label for="fecha" class="col-sm-3 col-form-label">Fecha:</label>
                     <div class="col-sm-9">
-                      <input type="date" class="form-control" id="exampleInputUsername2" placeholder="Fecha">
+                      <input type="date" [(ngModel)]="fecha" name="fecha" class="form-control" id="fecha" placeholder="Fecha">
                     </div>
                   </div>
                 </div>
                 <div class="col-6">
-                  <button type="submit" class="btn btn-gradient-primary mr-2">Buscar</button>
+                  <button (click)="obtenerEventosFecha()" type="submit" class="btn btn-gradient-primary mr-2">Buscar</button>
+                  <button (click)="limpiarEventos()" type="submit" class="btn btn-gradient-primary mr-2">Limpiar</button>
                 </div>
               </div>
             </form>
           </div>
-          <div class="col-4">
-            <div class="card">
-              <img src="../../../../assets/fondos/fondo1.jpg" style="width: 100%">
-              <h4 class="card-title mt-3">Coronavairus fest 5.0</h4>
-              <h5 class="card-title mt-1"> 2070/12/2 </h5>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-12">
+                <div *ngIf="eventos.length == 0 || eventos == undefined" class="alert alert-warning">
+                  <h4>No hay eventos</h4>
+                </div>
+              </div>
+              <div *ngFor="let evento of eventos;" class="col-4">
+                <div class="card">
+                  <img [src]="evento.foto" style="width: 100%">
+                  <div class="row">
+                    <div class="col-7">
+                      <h4 class="card-title mt-3">{{evento.nombre}}</h4>
+                      <h5 class="card-title mt-1"> {{evento.fecha | date}} </h5>
+                    </div>
+                    <div class="col-5 mt-4">
+                      <button class="d-block badge badge-warning"> Editar </button>
+                      <button class="d-blocke badge badge-danger mt-1" > Eliminar </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiServices} from '../../../services/api.services';
 import {Router} from '@angular/router';
+import {ApiRootServices} from '../../../services/api-Root.services';
 
 @Component({
   selector: 'app-negocios',
@@ -11,7 +12,7 @@ export class NegociosComponent implements OnInit {
 
   negocios: any[] = [];
 
-  constructor( private apiservice: ApiServices,
+  constructor( private apiservice: ApiRootServices,
                private router: Router) {
 
     this.apiservice.obtenerNegocios().subscribe( (resp: any) => {

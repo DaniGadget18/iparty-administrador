@@ -5,6 +5,7 @@ import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
 import {AuthApiServices} from '../../services/auth.services';
+import {ChatService} from '../../services/chat.services';
 
 @Component({
   selector: 'app-iniciarsesion',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   usuario: UsuarioModel = new UsuarioModel();
 
-  constructor( private apiservice: AuthApiServices, private router: Router) {
+  constructor( private apiservice: AuthApiServices, private router: Router, private apichatservices: ChatService) {
     this.intro = document.getElementById('body');
     this.intro.classList.add('body-login');
     this.wrapper = document.getElementById('content-wrapper-body');
@@ -33,6 +34,8 @@ export class LoginComponent implements OnInit {
     return this.apiservice.login(this.usuario).subscribe( (resp: any) => {
       console.log(resp);
       if (resp.message === 'ok') {
+        this.apichatservices.setupSocketConnection();
+        this.apichatservices.joinRoom(resp.data.allData[0]['id']);
         this.router.navigateByUrl('dashboard');
       }
     }, error => {

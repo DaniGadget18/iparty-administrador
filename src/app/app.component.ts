@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import { Router, NavigationEnd, NavigationStart, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
+import {ChatService} from './services/chat.services';
+import {MensajeModel} from './models/mensaje.model';
 
 @Component({
   selector: 'app-root',
@@ -8,15 +10,15 @@ import { Router, NavigationEnd, NavigationStart, RouteConfigLoadStart, RouteConf
 })
 export class AppComponent implements OnInit {
   title = 'iParty';
+  getmessages: boolean =  false;
 
-
-
+  @Output() mensaje: MensajeModel;
   showSidebar: boolean = true;
   showNavbar: boolean = true;
   showFooter: boolean = true;
   isLoading: boolean;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private apichatservices: ChatService) {
 
     // Removing Sidebar, Navbar, Footer for Documentation, Error and Auth pages
     router.events.forEach((event) => {
@@ -40,6 +42,19 @@ export class AppComponent implements OnInit {
           document.querySelector('.page-body-wrapper').classList.remove('full-page-wrapper');
           document.querySelector('.content-wrapper').classList.remove('auth', 'auth-img-bg');
           document.querySelector('.content-wrapper').classList.remove('p-0');
+          if (this.getmessages == false) {
+            this.apichatservices.getSala().subscribe( (resp: any) => {
+              console.log(resp);
+              this.apichatservices.joinRoom(resp);
+            });
+            this.getmessages = true;
+            this.apichatservices.getMessages().subscribe( (resp2: any) => {
+              console.log(resp2);
+            });
+          } else {
+            console.log('nachos');
+          }
+
         }
       }
     });

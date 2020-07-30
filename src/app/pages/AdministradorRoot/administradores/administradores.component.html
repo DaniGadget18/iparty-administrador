@@ -12,18 +12,28 @@
       <div class="card-body">
         <div class="row">
           <div class="col-6">
-            <form>
+            <form (ngSubmit)="registrarRoot(f)" #f='ngForm'>
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Datos administrador iParty</h4>
                   <div class="form-group">
-                    <label for="exampleInputUsername1">Email administrador</label>
-                    <input type="text" class="form-control" id="exampleInputUsername1"
+                    <label for="email">Email administrador</label>
+                    <input type="email" [(ngModel)]="usuario.email" name="email" class="form-control" id="email"
                            placeholder="Escribe email del administrador">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Contrasena:</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1"
+                    <label for="password">Contrasena:</label>
+                    <input type="password" [(ngModel)]="usuario.password" name="password" class="form-control" id="password"
+                           placeholder="Escribe una contrasena">
+                  </div>
+                  <div class="form-group">
+                    <label for="Nombre">Nombre:</label>
+                    <input type="text" [(ngModel)]="usuario.nombre" name="nombre" class="form-control" id="Nombre"
+                           placeholder="Escribe un nombre para administrador">
+                  </div>
+                  <div class="form-group">
+                    <label for="fecha_nacimiento">Fecha nacimiento:</label>
+                    <input type="date" [(ngModel)]="usuario.fecha_nacimiento" name="fecha_nacimiento" class="form-control" id="fecha_nacimiento"
                            placeholder="Escribe una contrasena">
                   </div>
                   <button class="btn btn-gradient-success">Agregar</button>
@@ -42,17 +52,15 @@
                     <thead>
                     <tr>
                       <th>Email</th>
+                      <th>Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                      <td>daniel@utt.edu.mx</td>
-                    </tr>
-                    <tr>
-                      <td>daniel@utt.edu.mx</td>
-                    </tr>
-                    <tr>
-                      <td>daniel@utt.edu.mx</td>
+                    <tr *ngFor="let root of roots;">
+                      <td>{{root.email}}</td>
+                      <td>
+                        <button  class="badge badge-danger" > Eliminar </button>
+                      </td>
                     </tr>
                     </tbody>
                   </table>

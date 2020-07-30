@@ -5,6 +5,7 @@ import {UsuarioModel} from '../../../models/usuario.model';
 import {ApiServices} from '../../../services/api.services';
 import Swal from 'sweetalert2';
 import {log} from 'util';
+import {ApiRootServices} from '../../../services/api-Root.services';
 
 @Component({
   selector: 'app-registrar-negocio',
@@ -16,7 +17,7 @@ export class RegistrarNegocioComponent implements OnInit {
   negocio = new NegocioModel();
   usuario = new UsuarioModel();
 
-  constructor( private apiServices: ApiServices) { }
+  constructor( private apiServices: ApiRootServices) { }
 
   ngOnInit() {
   }
