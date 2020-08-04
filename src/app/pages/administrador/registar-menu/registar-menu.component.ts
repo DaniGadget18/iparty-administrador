@@ -51,11 +51,11 @@ export class RegistarMenuComponent implements OnInit {
   }
 
   private crearProductoNegocio() { 
-    if (this.menu.nombre == null || this.menu.informacion == null ||this.menu.idcategoriamenu==null){
-      if (this.menu.nombre == null) {
+    if (this.menu.nombre == null || this.menu.informacion == null ||this.menu.idcategoriamenu==null || this.menu.nombre == "" || this.menu.informacion == "" ||this.menu.idcategoriamenu==""){
+      if (this.menu.nombre == null|| this.menu.nombre == "") {
        var undefin="Ingrese el Nombre"
       }
-      else if(this.menu.informacion == null) {
+      else if(this.menu.informacion == null || this.menu.informacion == "") {
         var undefin="Ingrese la Informacion"
       }
       else{
