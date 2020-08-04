@@ -86,7 +86,7 @@ export class FormEventoComponent implements OnInit {
           console.log(this.fotosubida);
         });
       })).subscribe();
-  }
+  } 
 
   accion(form: NgForm) {
     console.log(form);
@@ -98,6 +98,24 @@ export class FormEventoComponent implements OnInit {
   }
 
   registrarEvento() {
+    if (this.evento.nombre == null || this.evento.informacion == null || this.evento.nombre == ""|| this.evento.fecha == null || this.evento.fecha == "" || this.evento.informacion == ""){
+      if (this.evento.nombre == null || this.evento.nombre == "") {
+        var undefin="Ingrese el nomblre del evento"
+      }
+      else if(this.evento.informacion == null || this.evento.informacion == ""){
+        var undefin="Ingrese la informacion del evento"
+      }
+      else{
+        var undefin="Ingrese la fecha del evento"
+      }
+      Swal.fire({
+        icon: 'error',
+        title: undefin,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+    else{
     return this.apiservices.registrarEvento(this.evento).subscribe( (resp:any) => {
       Swal.fire({
         icon: 'success',
@@ -113,6 +131,7 @@ export class FormEventoComponent implements OnInit {
         timer: 1500
       });
     });
+  }
   }
   editarEvento() {
     return this.apiservices.editarEvento(this.evento).subscribe( (resp:any) => {

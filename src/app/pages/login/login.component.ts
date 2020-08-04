@@ -33,8 +33,8 @@ export class LoginComponent implements OnInit {
     var usu = form.value.email;
     var pass = form.value.password;
     console.log(usu, pass);
-    if (usu == null || pass == null) {
-      if (usu == null) {
+    if (usu == null || pass == null || pass == "" || usu == "") {
+      if (usu == null || usu == "") {
         undefin="Ingrese el Usuario"
       }
       else {
