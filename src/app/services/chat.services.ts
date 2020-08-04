@@ -2,18 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as io from 'socket.io-client';
 import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class ChatService {
 
   url: string = "http://localhost:3000"
+  apiUrl: string = "http://localhost:3333/api"
+  newurl: string = "https://81f210585f96.ngrok.io"
   socket;
-  constructor() {
-
+  notifaciones: any [] = [];
+  logged: boolean = false;
+  constructor( private http:HttpClient) {
+    this.socket = io(this.url);
   }
 
   setupSocketConnection(  ) {
-    this.socket = io("http://localhost:3000");
   }
 
   public sendMessage(room, message) {
@@ -22,18 +26,22 @@ export class ChatService {
 
   public getMessages() {
     return Observable.create((observer) => {
-      this.socket.on('new-message', (message) => {
+      this.socket.on('message', (message) => {
         observer.next(message);
       });
     });
   }
 
-  public joinRoom(room) {
-     this.socket.emit('join', room);
+  public online(room) {
+    this.socket.emit('online', room);
+  }
+
+  send(data: any) {
+    this.socket.emit('message', data);
   }
 
   public leaveRoom(room) {
-    this.socket.emit('leave_room', room);
+    this.socket.emit('disconnect', room);
   }
 
   public getSala() {
@@ -44,5 +52,37 @@ export class ChatService {
     });
   }
 
+  obtenerConversaciones() {
+    const data = {
+      idnegocio: "1",
+    };
+    return this.http.post(`${this.url}/api/getConversationNegocio`, data);
+  }
+
+  obtenerChat(iduser: string, idnegocio: number) {
+    const data = {
+      idnegocio: idnegocio,
+      conversacion: iduser
+    };
+    return this.http.post(`${this.url}/api/getchat`, data);
+  }
+
+  obtenerAdminRoom() {
+    const data = {
+      email: localStorage.getItem('email')
+    };
+    return this.http.post(`${this.apiUrl}/negocio/obteneridnombrenegocio`, data)
+      .pipe( map( (resp: any) => {
+        this.online(resp.room);
+        return resp;
+      }));
+  }
+
+  obtenerData() {
+    const data = {
+      email: localStorage.getItem('email')
+    };
+    return this.http.post(`${this.apiUrl}/negocio/obteneridnombrenegocio`, data);
+  }
 
 }

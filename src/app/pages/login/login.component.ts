@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiServices } from '../../services/api.services';
-import { UsuarioModel } from '../../models/usuario.model';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import {ApiServices} from '../../services/api.services';
+import {UsuarioModel} from '../../models/usuario.model';
+import {NgForm} from '@angular/forms';
+import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
-import { AuthApiServices } from '../../services/auth.services';
-import { ChatService } from '../../services/chat.services';
+import {AuthApiServices} from '../../services/auth.services';
+import {ChatService} from '../../services/chat.services';
 
 @Component({
   selector: 'app-iniciarsesion',
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     var undefin="";
     var usu = form.value.email;
     var pass = form.value.password;
-    console.log(usu, pass)
+    console.log(usu, pass);
     if (usu == null || pass == null) {
       if (usu == null) {
         undefin="Ingrese el Usuario"
@@ -45,8 +45,7 @@ export class LoginComponent implements OnInit {
         title: undefin,
         showConfirmButton: false,
         timer: 1500
-      })
-
+      });
     }
     else {
       this.usuario.email = form.value.email;
@@ -55,14 +54,14 @@ export class LoginComponent implements OnInit {
         console.log(resp);
         if (resp.message === 'ok') {
           this.apichatservices.setupSocketConnection();
-          this.apichatservices.joinRoom(resp.data.allData[0]['id']);
+          this.apichatservices.online(resp.data.allData[0]['id']);
           this.router.navigateByUrl('dashboard');
         }
       }, error => {
         console.log(error);
         Swal.fire({
           icon: 'error',
-          title: error.error.message,
+          title: error.error,
           showConfirmButton: false,
           timer: 1500
         });

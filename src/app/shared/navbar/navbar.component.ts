@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
+import {ChatService} from '../../services/chat.services';
 
 @Component({
   selector: 'app-navbar',
@@ -10,11 +11,18 @@ import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 export class NavbarComponent implements OnInit {
   public iconOnlyToggled = false;
   public sidebarToggled = false;
-  constructor(config: NgbDropdownConfig) {
+  notificaciones: any [] = [];
+  constructor(config: NgbDropdownConfig, private chatservices: ChatService) {
     config.placement = 'bottom-right';
   }
 
   ngOnInit() {
+  }
+
+  mostrar(){
+    console.log("si entra aqui");
+    this.notificaciones = this.chatservices.notifaciones;
+    console.log(this.notificaciones);
   }
 
   // toggle sidebar in small devices

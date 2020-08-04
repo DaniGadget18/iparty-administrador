@@ -13,6 +13,9 @@
       <div class="card-body">
         <div class="row">
           <div class="col-md-12">
+            <div *ngIf="isLoading" class="spinner-wrapper-cargar">
+              <div class="donut-cargar"></div>
+            </div>
             <div *ngIf="menu.length == 0" class="alert alert-info">
               <h4>Aun no hay productos registrados</h4>
             </div>

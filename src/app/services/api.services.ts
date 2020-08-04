@@ -5,6 +5,7 @@ import { UsuarioModel } from '../models/usuario.model';
 import {NegocioModel} from '../models/negocio.model';
 import {HorarioModel} from '../models/horario.model';
 import {MenuModel} from '../models/menu.model';
+import {EventoModel} from '../models/evento.model';
 
 
 
@@ -112,6 +113,35 @@ export class ApiServices {
       fecha
     };
     return this.httpclient.post(`${this.url}/negocio/obtenerEventosFecha`, data);
+  }
+
+  registrarEvento( evento: EventoModel ) {
+    const data = {
+      email: localStorage.getItem('email'),
+      ...evento
+    };
+    return this.httpclient.post(`${this.url}/negocio/registrarEvento`, data);
+  }
+
+  obtenerEventoById(id: number) {
+    const data = {
+      id
+    };
+    return this.httpclient.post(`${this.url}/negocio/obtenerEvento`, data);
+  }
+
+  eliminarEvento(id: number) {
+    const data = {
+      id
+    };
+    return this.httpclient.post(`${this.url}/negocio/eliminarEvento`, data);
+  }
+
+  editarEvento(evento: EventoModel) {
+    const data = {
+      ...evento
+    };
+    return this.httpclient.post(`${this.url}/negocio/editarEvento`, data);
   }
 
 

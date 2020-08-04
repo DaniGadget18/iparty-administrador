@@ -5,7 +5,7 @@
     </span>
     Eventos - negocio
   </h3>
-  <button class="btn btn-gradient-success float-right">Agregar</button>
+  <button class="btn btn-gradient-success float-right" routerLink="/eventos/registrar">Agregar</button>
 </div>
 <div class="row">
   <div class="col-lg-12 grid-margin stretch-card">
@@ -34,11 +34,14 @@
           <div class="col-12">
             <div class="row">
               <div class="col-12">
+                <div *ngIf="isLoading" class="spinner-wrapper-cargar">
+                  <div class="donut-cargar"></div>
+                </div>
                 <div *ngIf="eventos.length == 0 || eventos == undefined" class="alert alert-warning">
                   <h4>No hay eventos</h4>
                 </div>
               </div>
-              <div *ngFor="let evento of eventos;" class="col-4">
+              <div *ngFor="let evento of eventos; let i = index;" class="col-4">
                 <div class="card">
                   <img [src]="evento.foto" style="width: 100%">
                   <div class="row">
@@ -47,8 +50,8 @@
                       <h5 class="card-title mt-1"> {{evento.fecha | date}} </h5>
                     </div>
                     <div class="col-5 mt-4">
-                      <button class="d-block badge badge-warning"> Editar </button>
-                      <button class="d-blocke badge badge-danger mt-1" > Eliminar </button>
+                      <button [routerLink]="['/eventos/editar/', evento.id]"  class="d-block badge badge-warning"> Editar </button>
+                      <button (click)="eliminarEvento(evento.id, i)" class="d-blocke badge badge-danger mt-1" > Eliminar </button>
                     </div>
                   </div>
                 </div>

@@ -11,11 +11,15 @@ import Swal from 'sweetalert2';
 export class MenuComponent implements OnInit {
 
   menu: any[] = [];
+  isLoading: boolean = true;
 
   constructor( private apiservice: ApiServices,
                private router: Router) {
     this.apiservice.obtenerMenuNegocio().subscribe( (resp: any) => {
       this.menu = resp.data[0]["menu"];
+      this.isLoading = false;
+    }, (error) => {
+      console.log(error);
     });
   }
 

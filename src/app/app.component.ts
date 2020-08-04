@@ -10,13 +10,13 @@ import {MensajeModel} from './models/mensaje.model';
 })
 export class AppComponent implements OnInit {
   title = 'iParty';
-  getmessages: boolean =  false;
+  notificaciones: [] = [];
 
-  @Output() mensaje: MensajeModel;
   showSidebar: boolean = true;
   showNavbar: boolean = true;
   showFooter: boolean = true;
   isLoading: boolean;
+  logged: boolean = false;
 
   constructor(private router: Router, private apichatservices: ChatService) {
 
@@ -42,19 +42,16 @@ export class AppComponent implements OnInit {
           document.querySelector('.page-body-wrapper').classList.remove('full-page-wrapper');
           document.querySelector('.content-wrapper').classList.remove('auth', 'auth-img-bg');
           document.querySelector('.content-wrapper').classList.remove('p-0');
-          if (this.getmessages == false) {
-            this.apichatservices.getSala().subscribe( (resp: any) => {
-              console.log(resp);
-              this.apichatservices.joinRoom(resp);
+          if (this.apichatservices.socket != undefined) {
+            this.apichatservices.obtenerAdminRoom().subscribe(  (resp: any) => {
+              console.log('Online');
+            }, (error) => {
+              console.log(error);
             });
-            this.getmessages = true;
-            this.apichatservices.getMessages().subscribe( (resp2: any) => {
-              console.log(resp2);
-            });
-          } else {
-            console.log('nachos');
           }
-
+          this.apichatservices.getMessages().subscribe( (resp: any) => {
+            this.apichatservices.notifaciones.push(resp);
+          });
         }
       }
     });
@@ -79,5 +76,9 @@ export class AppComponent implements OnInit {
       }
       window.scrollTo(0, 0);
     });
+
+
+
+
   }
 }

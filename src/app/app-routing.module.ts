@@ -16,6 +16,7 @@ import {MensajesComponent} from './pages/administrador/mensajes/mensajes.compone
 import {HorariosComponent} from './pages/administrador/horarios/horarios.component';
 import {FotosComponent} from './pages/administrador/fotos/fotos.component';
 import {RegistarMenuComponent} from './pages/administrador/registar-menu/registar-menu.component';
+import {FormEventoComponent} from './pages/administrador/form-evento/form-evento.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,8 @@ const routes: Routes = [
   { path: 'reservacion', component: ReservacionComponent },
   { path: 'comentarios', component: ComentarioComponent },
   { path: 'eventos', component: EventoComponent },
+  { path: 'eventos/registrar', component: FormEventoComponent },
+  { path: 'eventos/editar/:id', component: FormEventoComponent },
   { path: 'mensajes', component: MensajesComponent },
   { path: 'administrador/negocios', component: NegociosComponent },
   { path: 'administrador/registrarnegocio', component: RegistrarNegocioComponent },

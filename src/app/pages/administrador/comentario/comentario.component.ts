@@ -9,11 +9,15 @@ import {ApiServices} from '../../../services/api.services';
 export class ComentarioComponent implements OnInit {
   comentarios: any[] = [];
   rank: number;
+  isLoading: boolean = true;
 
   constructor( private apiservices: ApiServices ) {
     this.apiservices.obtenerComentarios().subscribe( (resp:any) => {
       this.comentarios = resp.data;
       console.log(this.comentarios);
+      this.isLoading = false;
+    }, (error) => {
+      console.log(error);
     });
   }
 

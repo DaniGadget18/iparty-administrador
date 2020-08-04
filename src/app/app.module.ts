@@ -51,6 +51,7 @@ import {AuthApiServices} from './services/auth.services';
 import {ApiRootServices} from './services/api-Root.services';
 import { RegistarMenuComponent } from './pages/administrador/registar-menu/registar-menu.component';
 import {ChatService} from './services/chat.services';
+import { FormEventoComponent } from './pages/administrador/form-evento/form-evento.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import {ChatService} from './services/chat.services';
     HorariosComponent,
     NgDropFilesDirective,
     FotosComponent,
-    RegistarMenuComponent
+    RegistarMenuComponent,
+    FormEventoComponent
   ],
   imports: [
     BrowserModule,
