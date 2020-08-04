@@ -51,7 +51,7 @@ export class RegistarMenuComponent implements OnInit {
   }
 
   private crearProductoNegocio() { 
-    if (this.menu.nombre == null || this.menu.informacion == null ||this.menu.idcategoriamenu==null || this.menu.nombre == "" || this.menu.informacion == "" ||this.menu.idcategoriamenu==""){
+    if (this.menu.nombre == null || this.menu.informacion == null ||this.menu.idcategoriamenu==null || this.menu.nombre == "" || this.menu.informacion == "" ){
       if (this.menu.nombre == null|| this.menu.nombre == "") {
        var undefin="Ingrese el Nombre"
       }
