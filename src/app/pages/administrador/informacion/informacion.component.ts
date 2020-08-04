@@ -16,7 +16,7 @@ export class InformacionComponent implements OnInit {
 
   usuario = new UsuarioModel();
   negocio = new NegocioModel();
-  lunesinicio: string;
+  lunesinicio: string; 
   lunesfin: string;
   martesinicio: string;
   martesfin: string;
@@ -49,6 +49,7 @@ export class InformacionComponent implements OnInit {
   }
 
   actulizarInfoNegocio(form: NgForm) {
+
     this.apiservices.actualizarNegocio(this.negocio).subscribe( (resp: any ) => {
       console.log(resp);
       Swal.fire({
@@ -66,6 +67,7 @@ export class InformacionComponent implements OnInit {
         timer: 1500
       });
     });
+    
   }
 
 }

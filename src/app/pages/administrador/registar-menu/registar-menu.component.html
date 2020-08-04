@@ -32,7 +32,7 @@
             </div>
             <div class="col-6">
               <div class="card-body">
-                <h4>Categoria del producto:</h4>
+                <h4>Categoria del producto:</h4> 
                 <div *ngFor="let categoria of categorias; let i = index;" class="form-check">
                   <input class="form-check-input" [(ngModel)]="menu.idcategoriamenu" type="radio" name="categorias" id="{{i}}" value="{{categoria.id}}">
                   <label class="form-check-label" for="{{i}}">
