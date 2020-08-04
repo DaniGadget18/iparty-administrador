@@ -16,7 +16,7 @@
             <div *ngIf="isLoading" class="spinner-wrapper-cargar">
               <div class="donut-cargar"></div>
             </div>
-            <div *ngIf="comentarios.length == 0" class="alert alert-info">
+            <div *ngIf="comentarios.length == 0 && isLoading == false" class="alert alert-info">
               <h4>No hay comentarios</h4>
             </div>
             <div *ngFor="let comentario of comentarios;" class="col-md-12">

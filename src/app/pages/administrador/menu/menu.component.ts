@@ -19,6 +19,7 @@ export class MenuComponent implements OnInit {
       this.menu = resp.data[0]["menu"];
       this.isLoading = false;
     }, (error) => {
+      this.isLoading = false;
       console.log(error);
     });
   }
