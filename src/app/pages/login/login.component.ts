@@ -28,40 +28,34 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: NgForm) {
-    console.log(form);
-    var undefin="";
-    var usu = form.value.email;
-    var pass = form.value.password;
-    console.log(usu, pass);
-    if (usu == null || pass == null || pass == "" || usu == "") {
-      if (usu == null || usu == "") {
-        undefin="Ingrese el Usuario"
-      }
-      else {
-        undefin="Ingrese la Contraseña"
+    let text = '';
+    const usu = form.value.email;
+    const pass = form.value.password;
+    if (usu == null || pass == null || pass === '' || usu === '') {
+      if (usu === null || usu === '') {
+        text = 'Ingrese el Usuario';
+      } else {
+        text = 'Ingrese la Contraseña';
       }
       Swal.fire({
         icon: 'error',
-        title: undefin,
+        title: text,
         showConfirmButton: false,
         timer: 1500
       });
-    }
-    else {
+    } else {
       this.usuario.email = form.value.email;
       this.usuario.password = form.value.password;
       return this.apiservice.login(this.usuario).subscribe((resp: any) => {
-        console.log(resp);
         if (resp.message === 'ok') {
           this.apichatservices.setupSocketConnection();
           this.apichatservices.online(resp.data.allData[0]['id']);
           this.router.navigateByUrl('dashboard');
         }
       }, error => {
-        console.log(error);
         Swal.fire({
           icon: 'error',
-          title: error.error,
+          title: error.error.message,
           showConfirmButton: false,
           timer: 1500
         });
