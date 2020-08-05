@@ -10,15 +10,32 @@
   <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <form (ngSubmit)="registrarNegocio(f)"  #f='ngForm' >
+        <form [formGroup]="form" (ngSubmit)="registrarNegocioReact()" >
           <div class="row">
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Datos Bar / Antro</h4>
-                  <div class="form-group">
+                  <div class="form-group" [ngClass]="{ 'has-danger': !form.get('nombre').valid && form.get('nombre').touched }">
                     <label for="nombre">Nombre Bar / Antro</label>
-                    <input type="text" [(ngModel)]="negocio.nombre" class="form-control" id="nombre" name="nombre" placeholder="Nombre bar / antro">
+                    <input type="text"
+                           class="form-control"
+                           formControlName="nombre"
+                           id="nombre"
+                           placeholder="Nombre bar / antro">
+                    <div *ngIf="form.controls['nombre'].errors?.required && form.controls['nombre'].touched" class="text-danger">
+                      El nombre es necesario
+                    </div>
+                    <div *ngIf="form.controls['nombre'].errors?.minlength && form.controls['nombre'].touched" class="text-danger">
+                      Minimo 3 caracteres
+                    </div>
+                    <div *ngIf="form.status == 'PENDING'" class="alert alert-warning">
+                      Verificando el nombre
+                    </div>
+                    <div *ngIf="form.controls['nombre'].errors?.existe && form.controls['nombre'].touched" class="text-danger">
+                      Este nombre ya existe
+                    </div>
+                    {{form.status}}
                   </div>
                 </div>
               </div>
@@ -27,27 +44,60 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Datos administrador</h4>
-                  <div class="form-group">
+                  <div class="form-group" [ngClass]="{ 'has-danger': !form.get('email').valid && form.get('email').touched }">
                     <label for="email">Email administrador</label>
-                    <input type="email" [(ngModel)]="usuario.email" class="form-control" id="email" name='email' placeholder="Escribe email del administrador">
+                    <input type="email"
+                           class="form-control"
+                           formControlName="email"
+                           id="email"
+                           placeholder="Escribe email del administrador">
+                    <div *ngIf="form.controls['email'].errors?.required && form.controls['email'].touched" class="text-danger">
+                      El email es necesario
+                    </div>
+                    <div *ngIf="form.controls['email'].errors?.pattern && form.controls['email'].touched" class="text-danger">
+                      Escribe un correo valido
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="nomAdmin">Nombre:</label>
-                    <input type="text" [(ngModel)]="usuario.nombre" class="form-control" id="nomAdmin" name="nomAdmin" placeholder="Nombre del administrador">
+                  <div class="form-group" [ngClass]="{ 'has-danger': !form.get('nombreAdmin').valid && form.get('nombreAdmin').touched }">
+                    <label for="nombreAdmin">Nombre:</label>
+                    <input type="text"
+                           class="form-control"
+                           id="nombreAdmin"
+                           formControlName="nombreAdmin"
+                           placeholder="Nombre del administrador">
+                    <div *ngIf="form.controls['nombreAdmin'].errors?.required && form.controls['nombreAdmin'].touched" class="text-danger">
+                      El nombre del administrador es necesario
+                    </div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" [ngClass]="{ 'has-danger': !form.get('password').valid && form.get('password').touched }">
                     <label for="password">Contrasena:</label>
-                    <input type="password" [(ngModel)]="usuario.password" class="form-control" id="password" name="password" placeholder="Escribe una contrasena">
+                    <input type="password"
+                           class="form-control"
+                           id="password"
+                           formControlName="password"
+                           placeholder="Escribe una contrasena">
+                    <div *ngIf="form.controls['password'].errors?.minlength && form.controls['password'].touched" class="text-danger">
+                      Minimo 5 letras o numeros
+                    </div>
+                    <div *ngIf="form.controls['password'].errors?.required && form.controls['password'].touched" class="text-danger">
+                      la contraseña es necesaria
+                    </div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" [ngClass]="{ 'has-danger': !form.get('fecha_nacimiento').valid && form.get('fecha_nacimiento').touched }">
                     <label for="fecha_nacimiento">Fecha nacimiento:</label>
-                    <input type="date" [(ngModel)]="usuario.fecha_nacimiento" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" placeholder="Escribe una contrasena">
+                    <input type="date"
+                           class="form-control"
+                           id="fecha_nacimiento"
+                           formControlName="fecha_nacimiento">
+                    <div *ngIf="form.controls['fecha_nacimiento'].errors?.required && form.controls['fecha_nacimiento'].touched" class="text-danger">
+                      Fecha de nacimiento es necesario
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-gradient-success float-right"> Registrar </button>
+          <button [disabled]=" !form.valid " class="btn btn-gradient-success float-right"> Registrar </button>
         </form>
       </div>
     </div>
