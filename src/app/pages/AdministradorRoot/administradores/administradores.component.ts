@@ -26,23 +26,31 @@ export class AdministradoresComponent implements OnInit {
   }
 
   registrarRoot(form: NgForm) {
-
-    this.apiservices.registrarRoot(this.usuario).subscribe( (resp: any) => {
-      this.roots.push(resp.data);
-      Swal.fire({
-        icon: 'success',
-        title: 'Se ha registrado correctamente',
-        showConfirmButton: false,
-        timer: 1500
-      });
-    }, (error) => {
+    if (!form.valid) {
       Swal.fire({
         icon: 'error',
-        title: error.error.message,
-        showConfirmButton: false,
-        timer: 1500
+        title: 'Hubo un error',
+        text: 'Falta algun campo / campo invalido',
       });
-    });
+      return;
+    } else {
+      this.apiservices.registrarRoot(this.usuario).subscribe( (resp: any) => {
+        this.roots.push(resp.data);
+        Swal.fire({
+          icon: 'success',
+          title: 'Se ha registrado correctamente',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }, (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: error.error.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      });
+    }
   }
 
 }

@@ -23,19 +23,23 @@
                            formControlName="nombre"
                            id="nombre"
                            placeholder="Nombre bar / antro">
-                    <div *ngIf="form.controls['nombre'].errors?.required && form.controls['nombre'].touched" class="text-danger">
+                    <div *ngIf="form.controls['nombre'].errors?.required && form.controls['nombre'].touched" class="alert alert-danger mt-1">
                       El nombre es necesario
                     </div>
-                    <div *ngIf="form.controls['nombre'].errors?.minlength && form.controls['nombre'].touched" class="text-danger">
+                    <div *ngIf="form.controls['nombre'].errors?.minlength && form.controls['nombre'].touched" class="alert alert-danger mt-1">
                       Minimo 3 caracteres
                     </div>
-                    <div *ngIf="form.status == 'PENDING'" class="alert alert-warning">
+                    <div *ngIf="form.status == 'PENDING'" class="alert alert-warning mt-1">
                       Verificando el nombre
                     </div>
-                    <div *ngIf="form.controls['nombre'].errors?.existe && form.controls['nombre'].touched" class="text-danger">
+                    <div *ngIf="form.controls['nombre'].errors?.existe && form.controls['nombre'].touched" class="alert alert-danger mt-1">
                       Este nombre ya existe
                     </div>
-                    {{form.status}}
+                    <div *ngIf="!form.controls['nombre'].errors?.existe
+                         && form.controls['nombre'].valid"
+                         class="alert alert-success mt-1">
+                      Nombre disponible
+                    </div>
                   </div>
                 </div>
               </div>
@@ -51,10 +55,10 @@
                            formControlName="email"
                            id="email"
                            placeholder="Escribe email del administrador">
-                    <div *ngIf="form.controls['email'].errors?.required && form.controls['email'].touched" class="text-danger">
+                    <div *ngIf="form.controls['email'].errors?.required && form.controls['email'].touched" class="alert alert-danger mt-1">
                       El email es necesario
                     </div>
-                    <div *ngIf="form.controls['email'].errors?.pattern && form.controls['email'].touched" class="text-danger">
+                    <div *ngIf="form.controls['email'].errors?.pattern && form.controls['email'].touched" class="alert alert-danger mt-1">
                       Escribe un correo valido
                     </div>
                   </div>
@@ -65,7 +69,7 @@
                            id="nombreAdmin"
                            formControlName="nombreAdmin"
                            placeholder="Nombre del administrador">
-                    <div *ngIf="form.controls['nombreAdmin'].errors?.required && form.controls['nombreAdmin'].touched" class="text-danger">
+                    <div *ngIf="form.controls['nombreAdmin'].errors?.required && form.controls['nombreAdmin'].touched" class="alert alert-danger mt-1">
                       El nombre del administrador es necesario
                     </div>
                   </div>
@@ -76,10 +80,10 @@
                            id="password"
                            formControlName="password"
                            placeholder="Escribe una contrasena">
-                    <div *ngIf="form.controls['password'].errors?.minlength && form.controls['password'].touched" class="text-danger">
+                    <div *ngIf="form.controls['password'].errors?.minlength && form.controls['password'].touched" class="alert alert-danger mt-1">
                       Minimo 5 letras o numeros
                     </div>
-                    <div *ngIf="form.controls['password'].errors?.required && form.controls['password'].touched" class="text-danger">
+                    <div *ngIf="form.controls['password'].errors?.required && form.controls['password'].touched" class="alert alert-danger mt-1">
                       la contraseña es necesaria
                     </div>
                   </div>
@@ -89,7 +93,7 @@
                            class="form-control"
                            id="fecha_nacimiento"
                            formControlName="fecha_nacimiento">
-                    <div *ngIf="form.controls['fecha_nacimiento'].errors?.required && form.controls['fecha_nacimiento'].touched" class="text-danger">
+                    <div *ngIf="form.controls['fecha_nacimiento'].errors?.required && form.controls['fecha_nacimiento'].touched" class="alert alert-danger mt-1">
                       Fecha de nacimiento es necesario
                     </div>
                   </div>

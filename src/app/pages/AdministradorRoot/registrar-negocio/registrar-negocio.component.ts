@@ -71,6 +71,7 @@ export class RegistrarNegocioComponent implements OnInit {
   }
 
   existeNegocio( control: FormControl ): Promise<any> | Observable<any> {
+    console.log(control);
     let nombre;
     this.apiservices.existeNegocio(control.value).subscribe( async (resp: any) => {
       if (resp.data == null) {
