@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
           this.showFooter = false;
           document.querySelector('.main-panel').classList.add('w-100');
           document.querySelector('.page-body-wrapper').classList.add('full-page-wrapper');
-          document.querySelector('.content-wrapper').classList.remove('auth', 'auth-img-bg',);
+          document.querySelector('.content-wrapper').classList.remove('auth', 'auth-img-bg');
           document.querySelector('.content-wrapper').classList.remove('auth', 'lock-full-bg');
           if ((event['url'] == '/error-pages/404') || (event['url'] == '/error-pages/500')) {
             document.querySelector('.content-wrapper').classList.add('p-0');

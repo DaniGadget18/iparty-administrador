@@ -85,4 +85,15 @@ export class ChatService {
     return this.http.post(`${this.apiUrl}/negocio/obteneridnombrenegocio`, data);
   }
 
+
+  // Reservacion
+
+  public obtenerReservacion() {
+    return Observable.create((observer) => {
+      this.socket.on('reservacion', (sala) => {
+        observer.next(sala);
+      });
+    });
+  }
+
 }

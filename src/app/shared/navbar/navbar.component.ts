@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import {ChatService} from '../../services/chat.services';
+import {AuthApiServices} from '../../services/auth.services';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +14,10 @@ export class NavbarComponent implements OnInit {
   public iconOnlyToggled = false;
   public sidebarToggled = false;
   notificaciones: any [] = [];
-  constructor(config: NgbDropdownConfig, private chatservices: ChatService) {
+  constructor(config: NgbDropdownConfig,
+              private chatservices: ChatService,
+              private authservices: AuthApiServices,
+              private router: Router) {
     config.placement = 'bottom-right';
   }
 
@@ -53,6 +58,11 @@ export class NavbarComponent implements OnInit {
   // toggle right sidebar
   toggleRightSidebar() {
     document.querySelector('#right-sidebar').classList.toggle('open');
+  }
+
+  async logOut() {
+    this.authservices.logOut();
+    await this.router.navigateByUrl('/login');
   }
 
 }

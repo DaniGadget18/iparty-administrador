@@ -21,10 +21,13 @@ export class LoginComponent implements OnInit {
   constructor(private apiservice: AuthApiServices, private router: Router, private apichatservices: ChatService) {
     this.intro = document.getElementById('body');
     this.intro.classList.add('body-login');
+    this.intro.style.removeProperty('background');
     this.wrapper = document.getElementById('content-wrapper-body');
     this.wrapper.style.background = 'none';
+
   }
   ngOnInit() {
+
   }
 
   login(form: NgForm) {
@@ -46,12 +49,10 @@ export class LoginComponent implements OnInit {
     } else {
       this.usuario.email = form.value.email;
       this.usuario.password = form.value.password;
-      return this.apiservice.login(this.usuario).subscribe((resp: any) => {
-        if (resp.message === 'ok') {
-          this.apichatservices.setupSocketConnection();
-          this.apichatservices.online(resp.data.allData[0]['id']);
-          this.router.navigateByUrl('dashboard');
-        }
+      return this.apiservice.login(this.usuario).subscribe(async (resp: any) => {
+        this.apichatservices.setupSocketConnection();
+        this.apichatservices.online(resp.data.accessOnline);
+        await this.router.navigateByUrl('dashboard');
       }, error => {
         Swal.fire({
           icon: 'error',

@@ -6,12 +6,15 @@ import {NegocioModel} from '../models/negocio.model';
 import {HorarioModel} from '../models/horario.model';
 import {MenuModel} from '../models/menu.model';
 import {EventoModel} from '../models/evento.model';
+import {Observable} from 'rxjs';
 
 
 
 @Injectable()
 export class ApiServices {
+  url2 = 'https://c3fdb5e8ef62.ngrok.io/api';
   url = 'http://localhost:3333/api';
+  url_socket = 'http://localhost:3000/api';
   constructor( private httpclient: HttpClient) {
   }
 
@@ -143,6 +146,14 @@ export class ApiServices {
     };
     return this.httpclient.post(`${this.url}/negocio/editarEvento`, data);
   }
+
+  obtenerReservaciones() {
+    const data = {
+      email: localStorage.getItem('email')
+    };
+    return this.httpclient.post(`${this.url}/negocio/obtenerReservaciones`, data);
+  }
+
 
 
 

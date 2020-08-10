@@ -21,5 +21,9 @@ export class AuthApiServices {
         return resp;
       }));
   }
+  logOut() {
+    localStorage.removeItem('email');
+    localStorage.removeItem('token');
+  }
 
 }

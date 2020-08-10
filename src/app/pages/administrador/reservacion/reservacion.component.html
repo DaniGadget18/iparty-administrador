@@ -50,13 +50,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>Daniel Rodriguez</td>
-                  <td>2020/10/15</td>
-                  <td>5</td>
-                  <td>VIP</td>
-                  <td>20:52</td>
-                  <td> verde</td>
+                <tr *ngFor="let reservacion of reservaciones;">
+                  <td>{{reservacion.usuario.nombre}}</td>
+                  <td>{{reservacion.dia}}</td>
+                  <td>{{reservacion.personas}}</td>
+                  <td>{{reservacion.zona}}</td>
+                  <td>{{reservacion.dia}}</td>
+                  <td>{{reservacion.confirmacion}}</td>
                   <td>
                     <button class="badge badge-primary">
                       <i class="mdi mdi-email"></i>

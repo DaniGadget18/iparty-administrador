@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartsModule } from 'ng2-charts';
-
+import { AgmCoreModule } from '@agm/core';
 // Componentes purpule
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
@@ -91,7 +91,10 @@ import { FormEventoComponent } from './pages/administrador/form-evento/form-even
     ChartsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBZZp-RshwuzaO_hECe_yjt3rxc_wrgOYE'
+    })
   ],
   providers: [
     ApiServices,

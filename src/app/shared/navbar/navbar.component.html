@@ -16,7 +16,7 @@
             Activity Log
           </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="javascript:;">
+          <a class="dropdown-item" (click)="logOut()">
             <i class="mdi mdi-logout mr-2 text-primary"></i>
             Signout
           </a>
@@ -100,18 +100,10 @@
         </div>
       </li>
       <li class="nav-item nav-logout d-none d-lg-block">
-        <a class="nav-link" href="javascript:;">
+        <a class="nav-link" (click)="logOut()">
           <i class="mdi mdi-power"></i>
         </a>
       </li>
-      <li class="nav-item nav-settings d-none d-lg-block" (click)="toggleRightSidebar()">
-        <a class="nav-link">
-          <i class="mdi mdi-format-line-spacing"></i>
-        </a>
-      </li>
     </ul>
-    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" (click)="toggleOffcanvas()">
-      <span class="mdi mdi-menu"></span>
-    </button>
   </div>
 </nav>
