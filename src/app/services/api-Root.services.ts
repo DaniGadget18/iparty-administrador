@@ -6,13 +6,17 @@ import {UsuarioModel} from '../models/usuario.model';
 @Injectable()
 export class ApiRootServices {
   url = 'http://localhost:3333/api/root';
+  token: string = `bearer ${localStorage.getItem('token')}`;
   constructor( private httpclient: HttpClient) {
   }
   existeNegocio(nombre: string) {
     const data = {
       nombre
     };
-    return this.httpclient.post(`${this.url}/existeNegocio`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/existeNegocio`, data, {headers: header});
   }
 
   registrarNegocio( negocio: NegocioModel, usuario: UsuarioModel ) {
@@ -23,28 +27,43 @@ export class ApiRootServices {
       email: usuario.email,
       password: usuario.password
     };
-    return this.httpclient.post(`${this.url}/registrarNegocio`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/registrarNegocio`, data, {headers: header});
   }
 
   registrarRoot( usuario: UsuarioModel ){
     const data = {
       ...usuario
     };
-    return this.httpclient.post(`${this.url}/registrarRoot`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/registrarRoot`, data, {headers: header});
   }
 
   obtenerInfoNegocioRoot(id: any) {
     const data = {
       id
     };
-    return this.httpclient.post(`${this.url}/obtenerNegociobyid`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/obtenerNegociobyid`, data, {headers: header});
   }
 
   obtenerNegocios() {
-    return this.httpclient.get(`${this.url}/obtenerNegocios`);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.get(`${this.url}/obtenerNegocios`, {headers: header });
   }
 
   obtenerAdministradores() {
-    return this.httpclient.get(`${this.url}/administradoresroot`);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.get(`${this.url}/administradoresroot`, {headers: header});
   }
 }

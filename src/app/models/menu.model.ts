@@ -4,3 +4,10 @@ export class MenuModel {
   public informacion: string;
   public idcategoriamenu: number;
 }
+
+export interface Menu {
+  id: number;
+  nombre: string;
+  informacion: string;
+  idcategoriamenu: number;
+}

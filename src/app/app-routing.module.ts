@@ -17,29 +17,37 @@ import {HorariosComponent} from './pages/administrador/horarios/horarios.compone
 import {FotosComponent} from './pages/administrador/fotos/fotos.component';
 import {RegistarMenuComponent} from './pages/administrador/registar-menu/registar-menu.component';
 import {FormEventoComponent} from './pages/administrador/form-evento/form-evento.component';
+import {AuthGuard} from './guards/auth.guard';
+import {Error404Component} from './error-pages/error404/error404.component';
+import {Error500Component} from './error-pages/error500/error500.component';
+import {LoginGuard} from './guards/login.guard';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/404', pathMatch: 'full', data: { role: 'admin' } },
+  { path: '404', component: Error404Component },
+  { path: '505', component: Error500Component },
+  { path: 'login', component: LoginComponent, canActivate: [ LoginGuard ] },
   { path: 'forgetpassword', component: ForgetpasswordComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'informacion', component: InformacionComponent },
-  { path: 'horarios', component: HorariosComponent },
-  { path: 'fotos', component: FotosComponent },
-  { path: 'menu', component: MenuComponent },
-  { path: 'menu/registrar', component: RegistarMenuComponent },
-  { path: 'menu/registrar/:id', component: RegistarMenuComponent },
-  { path: 'reservacion', component: ReservacionComponent },
-  { path: 'comentarios', component: ComentarioComponent },
-  { path: 'eventos', component: EventoComponent },
-  { path: 'eventos/registrar', component: FormEventoComponent },
-  { path: 'eventos/editar/:id', component: FormEventoComponent },
-  { path: 'mensajes', component: MensajesComponent },
-  { path: 'administrador/negocios', component: NegociosComponent },
-  { path: 'administrador/registrarnegocio', component: RegistrarNegocioComponent },
-  { path: 'administrador/administradores', component: AdministradoresComponent },
-  { path: 'administrador/negocio/informacion/:id', component: InformacionNegocioComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
+  { path: 'informacion', component: InformacionComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
+  { path: 'horarios', component: HorariosComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
+  { path: 'fotos', component: FotosComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
+  { path: 'menu', component: MenuComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
+  { path: 'menu/registrar', component: RegistarMenuComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
+  { path: 'menu/registrar/:id', component: RegistarMenuComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
+  { path: 'reservacion', component: ReservacionComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
+  { path: 'comentarios', component: ComentarioComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
+  { path: 'eventos', component: EventoComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
+  { path: 'eventos/registrar', component: FormEventoComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
+  { path: 'eventos/editar/:id', component: FormEventoComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
+  { path: 'mensajes', component: MensajesComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
+  { path: 'administrador/negocios',
+    component: NegociosComponent,
+    canActivate: [ AuthGuard ], data: { role: 'root' } },
+  { path: 'administrador/registrarnegocio', component: RegistrarNegocioComponent, canActivate: [ AuthGuard ], data: { role: 'root' } },
+  { path: 'administrador/administradores', component: AdministradoresComponent, canActivate: [ AuthGuard ], data: { role: 'root' } },
+  { path: 'administrador/negocio/informacion/:id', component: InformacionNegocioComponent, canActivate: [AuthGuard], data: { role: 'root' } },
   //{ path: 'dashboard', component: DashboardComponent },
   //{ path: 'basic-ui', loadChildren: () => import('./basic-ui/basic-ui.module').then(m => m.BasicUiModule) },
   //{ path: 'charts', loadChildren: () => import('./charts/charts.module').then(m => m.ChartsDemoModule) },

@@ -13,3 +13,9 @@ export class FotoModel {
     this.progeso = 0;
   }
 }
+
+export interface Foto {
+    data: {
+      foto: string
+    };
+}

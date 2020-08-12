@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiServices} from '../../../services/api.services';
+import {Comentario} from '../../../models/comentario.model';
 
 @Component({
   selector: 'app-comentario',
@@ -7,14 +8,13 @@ import {ApiServices} from '../../../services/api.services';
   styleUrls: ['./comentario.component.scss']
 })
 export class ComentarioComponent implements OnInit {
-  comentarios: any[] = [];
+  comentarios: Comentario[] = [];
   rank: number;
-  isLoading: boolean = true;
+  isLoading = true;
 
   constructor( private apiservices: ApiServices ) {
-    this.apiservices.obtenerComentarios().subscribe( (resp:any) => {
+    this.apiservices.obtenerComentarios().subscribe( (resp: any) => {
       this.comentarios = resp.data;
-      console.log(this.comentarios);
       this.isLoading = false;
     }, (error) => {
       console.log(error);
@@ -27,14 +27,12 @@ export class ComentarioComponent implements OnInit {
   busquedaRank(  ) {
     this.apiservices.obtenerComentariosRank(this.rank).subscribe( (resp: any) => {
       this.comentarios = resp.data;
-      console.log(this.comentarios);
     });
   }
 
   limpiar(  ) {
     this.apiservices.obtenerComentarios().subscribe( (resp:any) => {
       this.comentarios = resp.data;
-      console.log(this.comentarios);
     });
   }
 

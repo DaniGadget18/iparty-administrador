@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ApiServices} from '../../../services/api.services';
 import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
+import {Menu} from '../../../models/menu.model';
 
 @Component({
   selector: 'app-productos',
@@ -10,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class MenuComponent implements OnInit {
 
-  menu: any[] = [];
+  menu: Menu[] = [];
   isLoading: boolean = true;
 
   constructor( private apiservice: ApiServices,

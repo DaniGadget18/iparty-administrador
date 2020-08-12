@@ -11,9 +11,12 @@ import {ApiRootServices} from '../../../services/api-Root.services';
 export class NegociosComponent implements OnInit {
 
   negocios: any[] = [];
+  fondo: HTMLElement;
 
   constructor( private apiservice: ApiRootServices,
                private router: Router) {
+    this.fondo = document.getElementById('body');
+    this.fondo.style.background = '#f2edf3';
 
     this.apiservice.obtenerNegocios().subscribe( (resp: any) => {
       this.negocios = resp.data;

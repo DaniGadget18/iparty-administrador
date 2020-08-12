@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
-import {FotoModel} from '../../../models/foto.model';
+import {Foto, FotoModel} from '../../../models/foto.model';
 import {ApiFotosServices} from '../../../services/fotos-api.services';
 import {Observable} from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -16,12 +16,12 @@ export class FotosComponent implements OnInit {
   private urlImage: Observable<string>;
   urlNueva: any[] = [];
 
-  fotos: any [] = [];
+  fotos: Foto [] = [];
   archivos: FotoModel[] = [];
   underDrop: boolean = false;
   constructor( private apiservices: ApiFotosServices,
                private storage: AngularFireStorage) {
-    this.apiservices.obtenerFotosNegocio().subscribe( (resp: any) => {
+    this.apiservices.obtenerFotosNegocio().subscribe( (resp: Foto) => {
       this.fotos = resp.data[0]['fotos'];
     });
   }

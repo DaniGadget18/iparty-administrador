@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import {NgForm} from '@angular/forms';
-import {NegocioModel} from '../../../models/negocio.model';
+import {Negocio, NegocioModel} from '../../../models/negocio.model';
 
 import {ApiServices} from '../../../services/api.services';
 import {UsuarioModel} from '../../../models/usuario.model';
@@ -19,12 +19,12 @@ export class InformacionComponent implements OnInit {
   lng = -103.3950567411292;
   usuario = new UsuarioModel();
   negocio = new NegocioModel();
-  isLoading: boolean = true;
+  isLoading = true;
 
 
   constructor( private apiservices: ApiServices ) {
     this.usuario.email = localStorage.getItem('email');
-    this.apiservices.obtenerInfoNegocio(this.usuario).subscribe( (resp: any) => {
+    this.apiservices.obtenerInfoNegocio(this.usuario).subscribe( (resp: Negocio) => {
       this.negocio.nombre = resp.data[0].nombre;
       this.negocio.ubicacion = resp.data[0].ubicacion;
       this.negocio.informacion = resp.data[0].informacion;
@@ -69,8 +69,5 @@ export class InformacionComponent implements OnInit {
     this.lng = $event.coords.lng;
   }
 
-  mapReady($event: MouseEvent) {
-    console.log($event.coords.lat, $event.coords.lng);
-  }
 
 }

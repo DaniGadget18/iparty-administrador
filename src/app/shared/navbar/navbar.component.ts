@@ -19,6 +19,10 @@ export class NavbarComponent implements OnInit {
               private authservices: AuthApiServices,
               private router: Router) {
     config.placement = 'bottom-right';
+
+    this.chatservices.getMessages().subscribe( (resp: any) => {
+      this.chatservices.notifaciones.push(resp);
+    });
   }
 
   ngOnInit() {

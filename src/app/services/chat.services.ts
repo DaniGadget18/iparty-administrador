@@ -9,12 +9,13 @@ export class ChatService {
 
   url: string = "http://localhost:3000"
   apiUrl: string = "http://localhost:3333/api"
-  newurl: string = "https://81f210585f96.ngrok.io"
+  newurl: string = "https://d666d6449cfe.ngrok.io"
   socket;
+  token: string = `bearer ${localStorage.getItem('token')}`;
   notifaciones: any [] = [];
   logged: boolean = false;
-  constructor( private http:HttpClient) {
-    this.socket = io(this.url);
+  constructor( private http: HttpClient) {
+    this.socket = io(this.newurl);
   }
 
   setupSocketConnection(  ) {
@@ -56,7 +57,7 @@ export class ChatService {
     const data = {
       idnegocio: "1",
     };
-    return this.http.post(`${this.url}/api/getConversationNegocio`, data);
+    return this.http.post(`${this.newurl}/api/getConversationNegocio`, data);
   }
 
   obtenerChat(iduser: string, idnegocio: number) {
@@ -64,14 +65,18 @@ export class ChatService {
       idnegocio: idnegocio,
       conversacion: iduser
     };
-    return this.http.post(`${this.url}/api/getchat`, data);
+
+    return this.http.post(`${this.newurl}/api/getchat`, data);
   }
 
   obtenerAdminRoom() {
     const data = {
       email: localStorage.getItem('email')
     };
-    return this.http.post(`${this.apiUrl}/negocio/obteneridnombrenegocio`, data)
+    const header = {
+      Authorization: this.token
+    };
+    return this.http.post(`${this.apiUrl}/negocio/obteneridnombrenegocio`, data, {headers: header})
       .pipe( map( (resp: any) => {
         this.online(resp.room);
         return resp;
@@ -82,7 +87,10 @@ export class ChatService {
     const data = {
       email: localStorage.getItem('email')
     };
-    return this.http.post(`${this.apiUrl}/negocio/obteneridnombrenegocio`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.http.post(`${this.apiUrl}/negocio/obteneridnombrenegocio`, data, { headers: header });
   }
 
 

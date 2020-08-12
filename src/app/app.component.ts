@@ -2,6 +2,7 @@ import {Component, OnInit, Output} from '@angular/core';
 import { Router, NavigationEnd, NavigationStart, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 import {ChatService} from './services/chat.services';
 import {MensajeModel} from './models/mensaje.model';
+import {AuthApiServices} from './services/auth.services';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +17,8 @@ export class AppComponent implements OnInit {
   showNavbar: boolean = true;
   showFooter: boolean = true;
   isLoading: boolean;
-  logged: boolean = false;
 
-  constructor(private router: Router, private apichatservices: ChatService) {
+  constructor(private router: Router, private apichatservices: ChatService, private authservices: AuthApiServices) {
 
     // Removing Sidebar, Navbar, Footer for Documentation, Error and Auth pages
     router.events.forEach((event) => {
@@ -42,16 +42,13 @@ export class AppComponent implements OnInit {
           document.querySelector('.page-body-wrapper').classList.remove('full-page-wrapper');
           document.querySelector('.content-wrapper').classList.remove('auth', 'auth-img-bg');
           document.querySelector('.content-wrapper').classList.remove('p-0');
-          if (this.apichatservices.socket != undefined) {
+          if (this.apichatservices.socket != undefined && this.authservices.isAutenticado()) {
             this.apichatservices.obtenerAdminRoom().subscribe(  (resp: any) => {
               console.log('Online');
             }, (error) => {
               console.log(error);
             });
           }
-          this.apichatservices.getMessages().subscribe( (resp: any) => {
-            this.apichatservices.notifaciones.push(resp);
-          });
         }
       }
     });
@@ -76,9 +73,6 @@ export class AppComponent implements OnInit {
       }
       window.scrollTo(0, 0);
     });
-
-
-
 
   }
 }

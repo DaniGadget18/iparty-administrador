@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiServices} from '../../../services/api.services';
 import {ChatService} from '../../../services/chat.services';
+import {Reservacion} from '../../../models/reservacion.model';
 
 @Component({
   selector: 'app-reservacion',
@@ -9,7 +10,7 @@ import {ChatService} from '../../../services/chat.services';
 })
 export class ReservacionComponent implements OnInit {
 
-  reservaciones: any[] = [];
+  reservaciones: Reservacion[] = [];
 
   constructor( private apiservices: ApiServices, private chatservices: ChatService ) {
     this.apiservices.obtenerReservaciones().subscribe( (resp: any) => {
@@ -17,7 +18,7 @@ export class ReservacionComponent implements OnInit {
     });
 
     this.chatservices.obtenerReservacion().subscribe( (resp: any) => {
-      const data = {
+      const data: Reservacion = {
         dia: resp.dia,
         confirmacion: resp.confirmacion,
         personas: resp.personas,

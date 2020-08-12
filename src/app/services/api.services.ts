@@ -15,6 +15,7 @@ export class ApiServices {
   url2 = 'https://c3fdb5e8ef62.ngrok.io/api';
   url = 'http://localhost:3333/api';
   url_socket = 'http://localhost:3000/api';
+  token: string =  `bearer ${localStorage.getItem('token')}`;
   constructor( private httpclient: HttpClient) {
   }
 
@@ -22,7 +23,10 @@ export class ApiServices {
     const data = {
       email: usuario.email
     };
-    return this.httpclient.post(`${this.url}/negocio/obtenerNegocio`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/negocio/obtenerNegocio`, data, {headers: header});
   }
 
   actualizarNegocio(negocio: NegocioModel) {
@@ -36,7 +40,10 @@ export class ApiServices {
       lng: negocio.lng,
       foto: null
     };
-    return this.httpclient.post(`${this.url}/negocio/editarNegocio`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/negocio/editarNegocio`, data, {headers: header});
   }
 
   actualizarHorariosNegocio( horarios: HorarioModel ) {
@@ -44,7 +51,10 @@ export class ApiServices {
       email: localStorage.getItem('email'),
       ...horarios
     };
-    return this.httpclient.post(`${this.url}/negocio/updateHorarioNegocio`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/negocio/updateHorarioNegocio`, data, {headers: header});
 
   }
 
@@ -52,18 +62,27 @@ export class ApiServices {
     const data = {
       email: localStorage.getItem('email')
     };
-    return this.httpclient.post(`${this.url}/negocio/getAllMenuByNegocio`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/negocio/getAllMenuByNegocio`, data, {headers: header});
   }
 
   obtenerCategoriasMenu() {
-    return this.httpclient.get(`${this.url}/negocio/getAllCategorias`);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.get(`${this.url}/negocio/getAllCategorias`, {headers: header});
   }
 
   obtenerMenuid(id: number) {
     const data = {
       id
     };
-    return this.httpclient.post(`${this.url}/negocio/obtenerMenuid`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/negocio/obtenerMenuid`, data, { headers: header });
   }
 
   registrarProductoNegocio(menu: MenuModel) {
@@ -71,28 +90,40 @@ export class ApiServices {
       email: localStorage.getItem('email'),
       ...menu
     };
-    return this.httpclient.post(`${this.url}/negocio/registrarProductoNegocio`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/negocio/registrarProductoNegocio`, data, {headers: header});
   }
 
   editarProductoNegocio(menu: MenuModel) {
     const data = {
       ...menu
     };
-    return this.httpclient.post(`${this.url}/negocio/updateMenuByNegocio`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/negocio/updateMenuByNegocio`, data, {headers: header});
   }
 
   eliminarProductoNegocio(id: number) {
     const data = {
       id
     };
-    return this.httpclient.post(`${this.url}/negocio/eliminarProducto`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/negocio/eliminarProducto`, data, {headers: header});
   }
 
   obtenerComentarios() {
     const data = {
       email: localStorage.getItem('email')
     };
-    return this.httpclient.post(`${this.url}/negocio/comentarios`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/negocio/comentarios`, data, {headers: header});
   }
 
   obtenerComentariosRank( rank: number ) {
@@ -100,14 +131,20 @@ export class ApiServices {
       email: localStorage.getItem('email'),
       rank
     };
-    return this.httpclient.post(`${this.url}/negocio/comentariosranked`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/negocio/comentariosranked`, data, {headers: header});
   }
 
   obtenerEventos() {
     const data = {
       email: localStorage.getItem('email')
     };
-    return this.httpclient.post(`${this.url}/negocio/obtenerEventos`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/negocio/obtenerEventos`, data, {headers: header});
   }
 
   obtenerEventosFecha( fecha: string) {
@@ -115,7 +152,10 @@ export class ApiServices {
       email: localStorage.getItem('email'),
       fecha
     };
-    return this.httpclient.post(`${this.url}/negocio/obtenerEventosFecha`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/negocio/obtenerEventosFecha`, data, {headers: header});
   }
 
   registrarEvento( evento: EventoModel ) {
@@ -123,35 +163,50 @@ export class ApiServices {
       email: localStorage.getItem('email'),
       ...evento
     };
-    return this.httpclient.post(`${this.url}/negocio/registrarEvento`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/negocio/registrarEvento`, data, {headers: header});
   }
 
   obtenerEventoById(id: number) {
     const data = {
       id
     };
-    return this.httpclient.post(`${this.url}/negocio/obtenerEvento`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/negocio/obtenerEvento`, data, {headers: header});
   }
 
   eliminarEvento(id: number) {
     const data = {
       id
     };
-    return this.httpclient.post(`${this.url}/negocio/eliminarEvento`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/negocio/eliminarEvento`, data, {headers: header});
   }
 
   editarEvento(evento: EventoModel) {
     const data = {
       ...evento
     };
-    return this.httpclient.post(`${this.url}/negocio/editarEvento`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/negocio/editarEvento`, data, {headers: header});
   }
 
   obtenerReservaciones() {
     const data = {
       email: localStorage.getItem('email')
     };
-    return this.httpclient.post(`${this.url}/negocio/obtenerReservaciones`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/negocio/obtenerReservaciones`, data, {headers: header});
   }
 
 

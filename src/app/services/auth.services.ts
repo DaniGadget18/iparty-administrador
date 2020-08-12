@@ -6,8 +6,12 @@ import {map} from 'rxjs/operators';
 
 @Injectable()
 export class AuthApiServices {
-  url = 'http://localhost:3333/api';
-  constructor( private httpclient: HttpClient,) {
+  private url = 'http://localhost:3333/api';
+  private token: string;
+  public isRoot: boolean;
+  public role: string;
+  constructor( private httpclient: HttpClient) {
+    this.verificarToken();
   }
 
   login(usuario: UsuarioModel) {
@@ -16,14 +20,49 @@ export class AuthApiServices {
     };
     return this.httpclient.post(`${this.url}/login`, data)
       .pipe( map( (resp: any) => {
-        localStorage.setItem('email', resp.data.email);
-        localStorage.setItem('token', resp.data["token"].token);
+        this.guardarToken(resp.data['token'].token, resp.data.email, resp.isRoot);
         return resp;
       }));
   }
+
   logOut() {
     localStorage.removeItem('email');
     localStorage.removeItem('token');
+  }
+
+
+  private guardarToken( idToken: string, email: string, root: boolean ) {
+    this.isRoot = root;
+    this.token = idToken;
+    localStorage.setItem('email', email);
+    localStorage.setItem('token', idToken);
+
+  }
+
+  verificarToken() {
+    if (localStorage.getItem('token')) {
+      this.token = localStorage.getItem('token');
+    } else {
+      this.token = '';
+    }
+
+    return this.token;
+  }
+
+  isAutenticado(): boolean {
+    return this.token.length > 2;
+  }
+
+  hasToken(): boolean {
+    const token = localStorage.getItem('token');
+    return !!token;
+  }
+
+  checkAuth() {
+    const header = {
+      Authorization: 'bearer ' + localStorage.getItem('token')
+    };
+    return this.httpclient.get(`${this.url}/check`, {headers: header});
   }
 
 }

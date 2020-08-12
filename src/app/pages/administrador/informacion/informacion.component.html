@@ -46,7 +46,7 @@
             <div class="col-6">
               <div class="card-body">
                 <h4>Ubicacion del negocio</h4>
-                <agm-map [zoom]="11" (mapClick)="getMapClick($event)" (mapReady)="mapReady($event)" [latitude]="lat" [longitude]="lng">
+                <agm-map [zoom]="11" (mapClick)="getMapClick($event)" [latitude]="lat" [longitude]="lng">
                   <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
                 </agm-map>
                 <button type="submit" class="btn btn-gradient-info btn-block mt-5">Editar informacion</button>

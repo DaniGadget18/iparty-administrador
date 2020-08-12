@@ -13,7 +13,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { DashboardComponent2 } from './dashboard/dashboard.component';
 import { TodoComponent } from './apps/todo-list/todo/todo.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { ContentAnimateDirective } from './shared/directives/content-animate.directive';
@@ -51,6 +50,8 @@ import {ApiRootServices} from './services/api-Root.services';
 import { RegistarMenuComponent } from './pages/administrador/registar-menu/registar-menu.component';
 import {ChatService} from './services/chat.services';
 import { FormEventoComponent } from './pages/administrador/form-evento/form-evento.component';
+import {Error500Component} from './error-pages/error500/error500.component';
+import {Error404Component} from './error-pages/error404/error404.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,9 @@ import { FormEventoComponent } from './pages/administrador/form-evento/form-even
     NgDropFilesDirective,
     FotosComponent,
     RegistarMenuComponent,
-    FormEventoComponent
+    FormEventoComponent,
+    Error500Component,
+    Error404Component
   ],
   imports: [
     BrowserModule,

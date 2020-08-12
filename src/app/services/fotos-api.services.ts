@@ -11,6 +11,7 @@ import {Observable} from 'rxjs';
 @Injectable()
 export class ApiFotosServices {
   url = 'http://localhost:3333/api';
+  token: string =  `bearer ${localStorage.getItem('token')}`;
   constructor( private httpclient: HttpClient,
                private storage: AngularFireStorage) {
   }
@@ -32,7 +33,10 @@ export class ApiFotosServices {
     const data = {
       email: localStorage.getItem('email')
     };
-    return this.httpclient.post(`${this.url}/negocio/getFotoByNegocioEmail`, data);
+    const header = {
+      Authorization: this.token
+    };
+    return this.httpclient.post(`${this.url}/negocio/getFotoByNegocioEmail`, data, {headers: header});
   }
 
 

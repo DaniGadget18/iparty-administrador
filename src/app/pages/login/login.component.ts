@@ -49,10 +49,14 @@ export class LoginComponent implements OnInit {
     } else {
       this.usuario.email = form.value.email;
       this.usuario.password = form.value.password;
-      return this.apiservice.login(this.usuario).subscribe(async (resp: any) => {
+      return this.apiservice.login(this.usuario).subscribe(async resp => {
         this.apichatservices.setupSocketConnection();
         this.apichatservices.online(resp.data.accessOnline);
-        await this.router.navigateByUrl('dashboard');
+        if (resp.isRoot) {
+          await this.router.navigateByUrl('administrador/negocios');
+        } else {
+          await this.router.navigateByUrl('dashboard');
+        }
       }, error => {
         Swal.fire({
           icon: 'error',
