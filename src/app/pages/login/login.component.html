@@ -1,4 +1,4 @@
-<section class="body-login">
+<section class="body-login" style="overflow-y:hidden;">
   <div class="d-flex align-items-center auth px-0 mt-5" >
     <div class="row w-100 mx-0">
       <div class="col-lg-4 mx-auto">
@@ -7,7 +7,10 @@
             <img src="assets/img/LOGO.png"  style="width: 10%" alt="logo">
           </div>
           <h4>Hola, entra para administrar tu negocio.</h4>
-          <form (ngSubmit)="login(f)" #f="ngForm" class="pt-3">
+          <div *ngIf="this.invalidtoken" class="alert alert-danger">
+            {{ this.invalidtoken }}
+          </div>
+          <form (ngSubmit)="login(f)" #f="ngForm">
             <div class="form-group">
               <input type="email" [(ngModel)]="usuario.email"
                      class="form-control form-control-lg"

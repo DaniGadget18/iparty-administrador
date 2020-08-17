@@ -33,12 +33,18 @@ export class FormEventoComponent implements OnInit {
       this.title = 'Edita el evento';
       this.btnString = 'Editar';
       this.apiservices.obtenerEventoById(id).subscribe( (resp: any) => {
+        console.log(resp);
         this.evento.fecha = resp.data.fecha;
         this.evento.nombre = resp.data.nombre;
         this.evento.informacion = resp.data.informacion;
         this.fotosubida.push(resp.data.foto);
       }, (error) => {
-        console.log(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error en la conexion',
+          showConfirmButton: false,
+          timer: 1500
+        });
       });
     } else {
       this.title = 'Registra un evento';
@@ -79,18 +85,17 @@ export class FormEventoComponent implements OnInit {
     task.snapshotChanges().pipe(
       finalize( () => {
         fileRef.getDownloadURL().subscribe( (url) => {
-          console.log(url);
           this.evento.foto = url;
           this.fotosubida.push(url);
           this.isLoadingFoto = false;
-          console.log(this.fotosubida);
         });
       })).subscribe();
-  } 
+  }
 
   accion(form: NgForm) {
-    console.log(form);
     if (this.router.snapshot.params.id) {
+      this.evento.id = this.router.snapshot.params.id;
+      this.evento.foto = this.fotosubida[0];
       this.editarEvento();
     } else {
       this.registrarEvento();
@@ -114,8 +119,7 @@ export class FormEventoComponent implements OnInit {
         showConfirmButton: false,
         timer: 1500
       });
-    }
-    else{
+    } else {
     return this.apiservices.registrarEvento(this.evento).subscribe( (resp:any) => {
       Swal.fire({
         icon: 'success',
@@ -135,6 +139,7 @@ export class FormEventoComponent implements OnInit {
   }
   editarEvento() {
     return this.apiservices.editarEvento(this.evento).subscribe( (resp:any) => {
+      console.log(resp);
       Swal.fire({
         icon: 'success',
         title: 'Se ha editado correctamente el evento',
@@ -142,6 +147,7 @@ export class FormEventoComponent implements OnInit {
         timer: 1500
       });
     }, (error) => {
+      console.log(error);
       Swal.fire({
         icon: 'error',
         title: error.error.message,

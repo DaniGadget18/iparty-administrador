@@ -15,8 +15,8 @@ import {ChatService} from '../../services/chat.services';
 export class LoginComponent implements OnInit {
   intro: HTMLElement;
   wrapper: HTMLElement;
-
   usuario: UsuarioModel = new UsuarioModel();
+  invalidtoken: string;
 
   constructor(private apiservice: AuthApiServices, private router: Router, private apichatservices: ChatService) {
     this.intro = document.getElementById('body');
@@ -24,7 +24,14 @@ export class LoginComponent implements OnInit {
     this.intro.style.removeProperty('background');
     this.wrapper = document.getElementById('content-wrapper-body');
     this.wrapper.style.background = 'none';
-
+    this.invalidtoken = this.apiservice.tokenValid;
+    if (this.apiservice.tokenValid) {
+      this.intro = document.getElementById('body');
+      this.intro.classList.add('body-login');
+      this.intro.style.removeProperty('background');
+      this.wrapper = document.getElementById('content-wrapper-body');
+      this.wrapper.style.background = 'none';
+    }
   }
   ngOnInit() {
 
@@ -50,7 +57,6 @@ export class LoginComponent implements OnInit {
       this.usuario.email = form.value.email;
       this.usuario.password = form.value.password;
       return this.apiservice.login(this.usuario).subscribe(async resp => {
-        this.apichatservices.setupSocketConnection();
         this.apichatservices.online(resp.data.accessOnline);
         if (resp.isRoot) {
           await this.router.navigateByUrl('administrador/negocios');

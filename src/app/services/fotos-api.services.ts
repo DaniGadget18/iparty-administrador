@@ -6,12 +6,11 @@ import {finalize, map} from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
 import {FotoModel} from '../models/foto.model';
 import {Observable} from 'rxjs';
+import {environment} from '../../environments/environment';
 
 
 @Injectable()
 export class ApiFotosServices {
-  url = 'http://localhost:3333/api';
-  token: string =  `bearer ${localStorage.getItem('token')}`;
   constructor( private httpclient: HttpClient,
                private storage: AngularFireStorage) {
   }
@@ -24,7 +23,10 @@ export class ApiFotosServices {
       email: localStorage.getItem('email'),
       url: imagen.url
     };
-    this.httpclient.post(`${this.url}/negocio/subirfoto`, data).subscribe( (resp: any) => {
+    const header = {
+      Authorization: environment.token
+    };
+    this.httpclient.post(`${environment.url.api}/negocio/subirfoto`, data, {headers: header}).subscribe( (resp: any) => {
       console.log(resp);
     });
   }
@@ -34,9 +36,19 @@ export class ApiFotosServices {
       email: localStorage.getItem('email')
     };
     const header = {
-      Authorization: this.token
+      Authorization: environment.token
     };
-    return this.httpclient.post(`${this.url}/negocio/getFotoByNegocioEmail`, data, {headers: header});
+    return this.httpclient.post(`${environment.url.api}/negocio/getFotoByNegocioEmail`, data, {headers: header});
+  }
+
+  eliminarFotoNegocio( id: number ) {
+    const data = {
+      id
+    };
+    const header = {
+      Authorization: environment.token
+    };
+    return this.httpclient.post(`${environment.url.api}/negocio/eliminarFotoNegocio`, data, {headers: header});
   }
 
 

@@ -35,7 +35,15 @@
               </div>
             </form>
           </div>
-          <div class="col-md-12 grid-margin stretch-card">
+          <div class="col-12">
+            <div *ngIf="isLoading" class="spinner-wrapper-cargar">
+              <div class="donut-cargar"></div>
+            </div>
+            <div class="alert alert-info text-center" *ngIf="reservaciones.length === 0">
+              Aun no hay reservaciones
+            </div>
+          </div>
+          <div class="col-md-12 grid-margin stretch-card" *ngIf="reservaciones.length > 0">
             <div class="table-responsive">
               <table class="table table-striped">
                 <thead>
@@ -52,10 +60,10 @@
                 <tbody>
                 <tr *ngFor="let reservacion of reservaciones;">
                   <td>{{reservacion.usuario.nombre}}</td>
-                  <td>{{reservacion.dia}}</td>
+                  <td>{{reservacion.dia | date: 'short'}}</td>
                   <td>{{reservacion.personas}}</td>
                   <td>{{reservacion.zona}}</td>
-                  <td>{{reservacion.dia}}</td>
+                  <td>{{reservacion.dia | date: 'shortTime'}}</td>
                   <td>{{reservacion.confirmacion}}</td>
                   <td>
                     <button class="badge badge-primary">
@@ -68,6 +76,7 @@
                 </tr>
                 </tbody>
               </table>
+              <ngb-pagination (pageChange)="changePage($event)"  [collectionSize]="total" [pageSize]="perPage" [(page)]="nowPage" aria-label="Default pagination" class="d-flex justify-content-center pagination-success"></ngb-pagination>
             </div>
           </div>
         </div>

@@ -15,7 +15,5 @@ export class FotoModel {
 }
 
 export interface Foto {
-    data: {
-      foto: string
-    };
+    foto: string;
 }

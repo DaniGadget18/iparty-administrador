@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiServices} from '../../../services/api.services';
 import {Comentario} from '../../../models/comentario.model';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-comentario',
@@ -17,7 +18,12 @@ export class ComentarioComponent implements OnInit {
       this.comentarios = resp.data;
       this.isLoading = false;
     }, (error) => {
-      console.log(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en la conexion',
+        showConfirmButton: false,
+        timer: 1500
+      });
     });
   }
 
@@ -26,6 +32,10 @@ export class ComentarioComponent implements OnInit {
 
   busquedaRank(  ) {
     this.apiservices.obtenerComentariosRank(this.rank).subscribe( (resp: any) => {
+      if (resp.data === []) {
+        this.comentarios = [];
+        return;
+      }
       this.comentarios = resp.data;
     });
   }

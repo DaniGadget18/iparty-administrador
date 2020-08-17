@@ -29,77 +29,105 @@
                       <td>Lunes:</td>
                       <td>
                         <input type="time" [(ngModel)]="lunesinicio" class="form-control" id="lunes_inicio"
-                               name="lunes_inicio" placeholder="19">
+                               name="lunes_inicio" placeholder="19" #iniciolunes='ngModel'>
                       </td>
                       <td>
                         <input type="time" [(ngModel)]="lunesfin" class="form-control" id="lunes_fin" name="lunes_fin"
-                               placeholder="19">
+                               placeholder="19" #finlunes='ngModel' value="00:00 0000">
+                        <div class="text text-danger mt-1"
+                              *ngIf="finlunes.errors?.required && f.submitted">
+                          Es necesario este campo
+                        </div>
                       </td>
                     </tr>
                     <tr>
                       <td>Martes:</td>
                       <td>
                         <input type="time" [(ngModel)]="martesinicio" class="form-control" id="martes_inicio"
-                               name="martes_inicio" placeholder="19">
+                               name="martes_inicio" placeholder="19" #iniciomartes='ngModel'>
                       </td>
                       <td>
                         <input type="time" [(ngModel)]="martesfin" class="form-control" id="martes_fin" name="martes_fin"
-                               placeholder="19">
+                               placeholder="19" #finmartes='ngModel'>
+                        <div class="text text-danger mt-1"
+                             *ngIf="finmartes.errors?.required && f.submitted">
+                          Es necesario este campo
+                        </div>
                       </td>
                     </tr>
                     <tr>
                       <td>Miercoles</td>
                       <td>
                           <input type="time" [(ngModel)]="miercolesinicio" class="form-control" id="miercoles_inicio"
-                                 name="miercoles_inicio" placeholder="19">
+                                 name="miercoles_inicio" placeholder="19" #iniciomiercoles='ngModel'>
                       </td>
                       <td>
                         <input type="time" [(ngModel)]="miercolesfin" class="form-control" id="miercoles_fin"
-                               name="miercoles_fin" placeholder="19">
+                               name="miercoles_fin" placeholder="19" #finmiercoles='ngModel'>
+                        <div class="text text-danger mt-1"
+                             *ngIf="finmiercoles.errors?.required && f.submitted">
+                          Es necesario este campo
+                        </div>
                       </td>
                     </tr>
                     <tr>
                       <td>Jueves</td>
                       <td>
                         <input type="time" [(ngModel)]="juevesinicio" class="form-control" id="jueves_inicio"
-                               name="jueves_inicio" placeholder="19">
+                               name="jueves_inicio" placeholder="19" #iniciojueves='ngModel'>
                       </td>
                       <td>
                         <input type="time" [(ngModel)]="juevesfin" class="form-control" id="jueves_fin" name="jueves_fin"
-                               placeholder="19">
+                               placeholder="19" #finjueves='ngModel'>
+                        <div class="text text-danger mt-1"
+                             *ngIf="finjueves.errors?.required && f.submitted">
+                          Es necesario este campo
+                        </div>
                       </td>
                     </tr>
                     <tr>
                       <td>Viernes</td>
                       <td>
                         <input type="time" [(ngModel)]="viernesinicio" class="form-control" id="viernes_inicio"
-                               name="viernes_inicio" placeholder="19">
+                               name="viernes_inicio" placeholder="19" #inicioviernes='ngModel'>
                       </td>
                       <td>
                         <input type="time" [(ngModel)]="viernesfin" class="form-control" id="viernes_fin"
-                               name="viernes_fin" placeholder="19">
+                               name="viernes_fin" placeholder="19" #finviernes='ngModel'>
+                        <div class="text text-danger mt-1"
+                             *ngIf="finviernes.errors?.required && f.submitted">
+                          Es necesario este campo
+                        </div>
                       </td>
                     </tr>
                     <tr>
                       <td>Sabado</td>
                       <td>
                         <input type="time" [(ngModel)]="sabadoinicio" class="form-control" id="sabado_inicio"
-                               name="sabado_inicio" placeholder="19">
+                               name="sabado_inicio" placeholder="19" #iniciosabado='ngModel'>
                       </td>
                       <td>
                         <input type="time" [(ngModel)]="sabadofin" class="form-control" id="sabado_fin" name="sabado_fin"
-                               placeholder="19">
+                               placeholder="19" #finsabado='ngModel'>
+                        <div class="text text-danger mt-1"
+                             *ngIf="finsabado.errors?.required && f.submitted">
+                          Es necesario este campo
+                        </div>
                       </td>
                     </tr>
                     <tr>
                       <td>Domingo</td>
                       <td>
                         <input type="time" [(ngModel)]="domingoinicio" class="form-control" id="domingo_inicio"
-                               name="domingo_inicio" placeholder="19">
+                               name="domingo_inicio" placeholder="19" #iniciodomingo='ngModel'>
                       </td>
                       <td>
                         <input type="time" [(ngModel)]="domingofin" class="form-control" id="domingo_fin"
-                               name="domingo_fin" placeholder="19">
+                               name="domingo_fin" placeholder="19" #findomingo='ngModel'>
+                        <div class="text text-danger mt-1"
+                             *ngIf="findomingo.errors?.required && f.submitted">
+                          Es necesario este campo
+                        </div>
                       </td>
                     </tr>
                     </tbody>

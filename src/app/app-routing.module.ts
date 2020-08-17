@@ -24,7 +24,7 @@ import {LoginGuard} from './guards/login.guard';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/404', pathMatch: 'full', data: { role: 'admin' } },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full', data: { role: 'admin' } },
   { path: '404', component: Error404Component },
   { path: '505', component: Error500Component },
   { path: 'login', component: LoginComponent, canActivate: [ LoginGuard ] },

@@ -50,7 +50,7 @@ export class RegistarMenuComponent implements OnInit {
     }
   }
 
-  private crearProductoNegocio() { 
+  private crearProductoNegocio() {
     if (this.menu.nombre == null || this.menu.informacion == null ||this.menu.idcategoriamenu==null || this.menu.nombre == "" || this.menu.informacion == "" ){
       if (this.menu.nombre == null|| this.menu.nombre == "") {
        var undefin="Ingrese el Nombre"
@@ -66,9 +66,8 @@ export class RegistarMenuComponent implements OnInit {
         title: undefin,
         showConfirmButton: false,
         timer: 1500
-      })
-    }
-    else{
+      });
+    } else {
     this.apiservices.registrarProductoNegocio(this.menu).subscribe( (resp: any) =>{
       Swal.fire({
         icon: 'success',
@@ -83,7 +82,8 @@ export class RegistarMenuComponent implements OnInit {
         showConfirmButton: false,
         timer: 1500
       });
-    });}
+    });
+    }
   }
 
   private editarProductoNegocio() {

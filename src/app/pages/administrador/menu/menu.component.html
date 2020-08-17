@@ -43,6 +43,7 @@
                 </tr>
                 </tbody>
               </table>
+              <ngb-pagination (pageChange)="changePage($event)"  [collectionSize]="total" [pageSize]="perPage" [page]="nowPage" aria-label="Default pagination" class="d-flex justify-content-center pagination-success"></ngb-pagination>
             </div>
           </div>
         </div>

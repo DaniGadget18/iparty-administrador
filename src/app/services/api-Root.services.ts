@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {NegocioModel} from '../models/negocio.model';
 import {UsuarioModel} from '../models/usuario.model';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class ApiRootServices {
-  url = 'http://localhost:3333/api/root';
-  token: string = `bearer ${localStorage.getItem('token')}`;
   constructor( private httpclient: HttpClient) {
   }
   existeNegocio(nombre: string) {
@@ -14,9 +13,9 @@ export class ApiRootServices {
       nombre
     };
     const header = {
-      Authorization: this.token
+      Authorization: environment.token
     };
-    return this.httpclient.post(`${this.url}/existeNegocio`, data, {headers: header});
+    return this.httpclient.post(`${environment.url.root}/existeNegocio`, data, {headers: header});
   }
 
   registrarNegocio( negocio: NegocioModel, usuario: UsuarioModel ) {
@@ -28,9 +27,9 @@ export class ApiRootServices {
       password: usuario.password
     };
     const header = {
-      Authorization: this.token
+      Authorization: environment.token
     };
-    return this.httpclient.post(`${this.url}/registrarNegocio`, data, {headers: header});
+    return this.httpclient.post(`${environment.url.root}/registrarNegocio`, data, {headers: header});
   }
 
   registrarRoot( usuario: UsuarioModel ){
@@ -38,9 +37,9 @@ export class ApiRootServices {
       ...usuario
     };
     const header = {
-      Authorization: this.token
+      Authorization: environment.token
     };
-    return this.httpclient.post(`${this.url}/registrarRoot`, data, {headers: header});
+    return this.httpclient.post(`${environment.url.root}/registrarRoot`, data, {headers: header});
   }
 
   obtenerInfoNegocioRoot(id: any) {
@@ -48,22 +47,32 @@ export class ApiRootServices {
       id
     };
     const header = {
-      Authorization: this.token
+      Authorization: environment.token
     };
-    return this.httpclient.post(`${this.url}/obtenerNegociobyid`, data, {headers: header});
+    return this.httpclient.post(`${environment.url.root}/obtenerNegociobyid`, data, {headers: header});
   }
 
   obtenerNegocios() {
     const header = {
-      Authorization: this.token
+      Authorization: environment.token
     };
-    return this.httpclient.get(`${this.url}/obtenerNegocios`, {headers: header });
+    return this.httpclient.get(`${environment.url.root}/obtenerNegocios`, {headers: header });
   }
 
   obtenerAdministradores() {
     const header = {
-      Authorization: this.token
+      Authorization: environment.token
     };
-    return this.httpclient.get(`${this.url}/administradoresroot`, {headers: header});
+    return this.httpclient.get(`${environment.url.root}/administradoresroot`, {headers: header});
+  }
+
+  eliminarUsuario( id: number ) {
+    const header = {
+      Authorization: environment.token
+    };
+    const data = {
+      id
+    };
+    return this.httpclient.post(`${environment.url.root}/eliminarUsuario`, data, {headers: header});
   }
 }

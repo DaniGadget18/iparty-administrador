@@ -7,6 +7,8 @@ import {AuthApiServices} from '../services/auth.services';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+  intro: HTMLElement;
+  wrapper: HTMLElement;
 
   constructor( private auth: AuthApiServices, private router: Router ) {
   }
@@ -18,18 +20,23 @@ export class AuthGuard implements CanActivate {
     if (this.auth.isAutenticado()) {
       this.auth.checkAuth().subscribe( (resp: any) => {
         if (resp.role.role !== route.data.role) {
-          console.log('si entro aqui');
-          if (resp.role.role == 'admin') {
+          if (resp.role.role === 'admin') {
             this.router.navigate(['/dashboard']);
             return false;
-          } else {
+          } else if (resp.role.role === 'root') {
             this.router.navigate(['/administrador/negocios']);
             return false;
           }
         }
+      }, (error) => {
+        console.log(error);
       });
       return true;
     } else {
+      localStorage.removeItem('email');
+      localStorage.removeItem('token');
+      localStorage.removeItem('expira');
+      this.auth.tokenValid = 'Expiro el token, vuelve a iniciar sesion';
       this.router.navigateByUrl('/login');
       return false;
     }

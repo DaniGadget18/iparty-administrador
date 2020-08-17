@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
-  mostrar(){
+  mostrar() {
     console.log("si entra aqui");
     this.notificaciones = this.chatservices.notifaciones;
     console.log(this.notificaciones);
@@ -64,9 +64,9 @@ export class NavbarComponent implements OnInit {
     document.querySelector('#right-sidebar').classList.toggle('open');
   }
 
-  async logOut() {
+  logOut() {
+    this.router.navigate(['/login']);
     this.authservices.logOut();
-    await this.router.navigateByUrl('/login');
   }
 
 }

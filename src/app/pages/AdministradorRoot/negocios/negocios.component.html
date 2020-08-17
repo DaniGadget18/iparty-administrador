@@ -11,13 +11,25 @@
     <div class="card">
       <div class="card-body">
         <div class="row">
-          <div *ngFor="let negocio of negocios;" class="col-4 mt-3">
-            <div class="card">
-              <img src="../../../../assets/fondos/fondo1.jpg" style="width: 100%">
-              <h5 class="card-title mt-3">Negocio: {{negocio.nombre}}</h5>
-              <button [routerLink]="['/administrador/negocio/informacion/', negocio.id]" class="btn btn-primary">Informacion</button>
-              <button (click)="informacionNegocio(negocio.id)" class="btn btn-danger mt-3">Eliminar</button>
-            </div>
+          <div class="col-12">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Administrador</th>
+                <th>Detalles</th>
+                <th>Accion</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let negocio of negocios;">
+                <td>{{ negocio.nombre }}</td>
+                <td>{{ negocio.usuario[0].email || null }}</td>
+                <td><button class="badge badge-warning" [routerLink]="['/administrador/negocio/informacion', negocio.id]">Detalles</button></td>
+                <td><button class="badge badge-danger">Eliminar</button></td>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

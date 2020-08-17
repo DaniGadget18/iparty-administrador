@@ -59,11 +59,51 @@
                   <div class="type_msg" *ngIf="chats.length > 0">
                     <div class="input-group">
                       <input [(ngModel)]="mensaje" name="mensaje" id="mensaje" type="text" class="form-control" placeholder="Escribe un mensaje">
-                      <button (click)="send()" class="msg_send_btn">
+                      <button (click)="enviarMensaje()" class="msg_send_btn">
                         <i class="mdi mdi-send"></i>
                       </button>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-5">
+                <div class="conversacion-window">
+                  <div class="app-conversaciones">
+                    <div class="conversacion" (click)="mostrarConversacionNuevo(conversacion.last['conversacion'], i)" *ngFor="let conversacion of this.apichatservice.conversaciones; let i = index" [ngClass]="{ 'active_conversacion': indexchat == i }">
+                      <div class="foto-conversacion">
+                        <img src="https://ptetutorials.com/images/user-profile.png" alt="sun">
+                      </div>
+                      <div class="encabezado">
+                        <h5> {{conversacion.last['nombre']}} <span class="float-right fecha_conversacion"> {{conversacion.last['createdAt'] | date : 'short'}} </span> </h5>
+                        <p class="mensaje-conversacion"> {{conversacion.last['mensaje']}} </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-7">
+                <div class="chat-window">
+                  <h1>Chat</h1>
+                  <hr>
+                  <div class="app-mensajes" id="app-mensajes">
+                    <div *ngFor="let mensaje of apichatservice.chat"
+                         [ngClass]="{ 'text-right': apichatservice.idnegocio == mensaje.from }">
+                  <span class="badge badge-primary"
+                        [ngClass]="{ 'badge-primary': apichatservice.idnegocio == mensaje.from ,
+                                      'badge-success': apichatservice.idnegocio != mensaje.from }">
+                          {{mensaje.nombre}} </span>
+                      <p> {{mensaje.mensaje }}</p>
+                    </div>
+                  </div>
+                  <input (keyup.enter)="enviarMensaje()"
+                         [(ngModel)]="mensaje"
+                         type="text"
+                         class="form-control"
+                         name="mensaje" value="" placeholder="Enviar mensaje">
                 </div>
               </div>
             </div>

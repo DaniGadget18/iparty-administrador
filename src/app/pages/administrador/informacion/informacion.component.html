@@ -31,8 +31,7 @@
                     <label for="id_categoria">Categoria:</label>
                     <select [(ngModel)]="negocio.idcategoria" class="form-control" id="id_categoria"
                             name="id_categoria">
-                      <option value="2">Antro</option>
-                      <option value="1">Bar</option>
+                      <option *ngFor="let categoria of categorias" [value]="categoria.id"> {{categoria.categoria }} </option>
                     </select>
                   </div>
                   <div class="form-group">

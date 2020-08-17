@@ -20,7 +20,9 @@
               <h4 class="mt-5"> Coloca tus imagenes aqui </h4>
               <img src="" alt="">
             </div>
-            <button (click)="subirfotos()" [disabled]="archivos.length === 0" type="submit" class="btn btn-gradient-info mt-3">Cargar fotos</button>
+            <button (click)="subirfotos()" [disabled]="archivos.length === 0" type="submit"
+                    class="btn btn-gradient-info mt-3">Cargar fotos
+            </button>
             <button (click)="limpiarFotos()" type="submit" class="btn btn-gradient-danger mt-3">Limpiar</button>
             <h4 class="card-title mt-3">Imagenes subidas</h4>
           </div>
@@ -30,23 +32,24 @@
                 <thead>
                 <tr>
                   <th>Nombre archivo</th>
-                  <th>Tamano.</th>
+                  <th>Tamano</th>
                   <th>Progreso</th>
                   <th>Estado</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr *ngFor="let archivo of archivos">
-                  <td [ngClass]="{ 'text-succesful': archivo.progeso >= 100 }" >{{archivo.nombre}}</td>
+                  <td [ngClass]="{ 'text-succesful': archivo.progeso >= 100 }">{{archivo.nombre}}</td>
                   <td>{{archivo.archivo.size / 1024 / 2024 | number: '.2-2' }} MB</td>
                   <td>
                     <div class="progress">
-                      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': archivo.progeso + '%' }" ></div>
+                      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': archivo.progeso + '%' }"></div>
                     </div>
                   </td>
                   <td>
                     <label *ngIf="archivo.progeso == 0" class="badge badge-info">Esperando</label>
-                    <label *ngIf="archivo.progeso > 0 && archivo.subiendo == true" class="badge badge-primary">En progreso</label>
+                    <label *ngIf="archivo.progeso > 0 && archivo.subiendo == true" class="badge badge-primary">En
+                      progreso</label>
                     <label *ngIf="archivo.progeso >= 100" class="badge badge-success">Completado</label>
                   </td>
                 </tr>
@@ -54,31 +57,23 @@
               </table>
             </div>
           </div>
-          <div class="col-6">
+          <div class="col-12">
             <div *ngIf="fotos.length == 0" class="alert alert-info">
               <h4> Aun no hay fotos cargadas en el negocio </h4>
             </div>
-            <div *ngIf="fotos.length > 0"  class="card mb-3" style="max-width: 540px;">
-              <div *ngFor="let foto of fotos;" class="row no-gutters">
-                <div class="col-md-4">
+            <div class="card-columns" *ngIf="fotos.length > 0">
+              <div class="card text-center" *ngFor="let foto of fotos;">
+                <div class="card-body">
                   <img [src]="foto.foto" class="card-img" alt="...">
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <button class="badge badge-danger"> Eliminar</button>
-                  </div>
+                  <button (click)="eliminarFoto(foto.id)" class="badge badge-danger btn-sm mt-2"> Eliminar</button>
                 </div>
               </div>
             </div>
-            <div *ngIf="urlNueva.length > 0"  class="card mb-3" style="max-width: 540px;">
-              <div *ngFor="let url of urlNueva;" class="row no-gutters">
-                <div class="col-md-4">
-                  <img [src]="url" class="card-img" alt="...">
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <button class="badge badge-danger"> Eliminar</button>
-                  </div>
+            <div class="card-columns" *ngIf="urlNueva.length > 0">
+              <div class="card text-center" *ngFor="let url of urlNueva;">
+                <div class="card-body">
+                  <img src="{{url}}" class="card-img" alt="...">
+                  <button class="badge badge-danger btn-sm mt-2"> Eliminar</button>
                 </div>
               </div>
             </div>

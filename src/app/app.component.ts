@@ -3,6 +3,7 @@ import { Router, NavigationEnd, NavigationStart, RouteConfigLoadStart, RouteConf
 import {ChatService} from './services/chat.services';
 import {MensajeModel} from './models/mensaje.model';
 import {AuthApiServices} from './services/auth.services';
+import {environment} from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -13,13 +14,12 @@ export class AppComponent implements OnInit {
   title = 'iParty';
   notificaciones: [] = [];
 
-  showSidebar: boolean = true;
-  showNavbar: boolean = true;
-  showFooter: boolean = true;
+  showSidebar: boolean;
+  showNavbar: boolean;
+  showFooter: boolean;
   isLoading: boolean;
 
-  constructor(private router: Router, private apichatservices: ChatService, private authservices: AuthApiServices) {
-
+  constructor(private router: Router, private authservices: AuthApiServices) {
     // Removing Sidebar, Navbar, Footer for Documentation, Error and Auth pages
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
@@ -42,12 +42,14 @@ export class AppComponent implements OnInit {
           document.querySelector('.page-body-wrapper').classList.remove('full-page-wrapper');
           document.querySelector('.content-wrapper').classList.remove('auth', 'auth-img-bg');
           document.querySelector('.content-wrapper').classList.remove('p-0');
-          if (this.apichatservices.socket != undefined && this.authservices.isAutenticado()) {
-            this.apichatservices.obtenerAdminRoom().subscribe(  (resp: any) => {
-              console.log('Online');
-            }, (error) => {
-              console.log(error);
-            });
+          if (this.authservices.isAutenticado()) {
+            this.showSidebar = true;
+            this.showNavbar = true;
+            this.showFooter = true;
+          } else {
+            this.showSidebar = false;
+            this.showNavbar = false;
+            this.showFooter = false;
           }
         }
       }
@@ -66,6 +68,7 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit() {
+    console.log('entra aqui');
     // Scroll to top after route change
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
@@ -73,6 +76,5 @@ export class AppComponent implements OnInit {
       }
       window.scrollTo(0, 0);
     });
-
   }
 }

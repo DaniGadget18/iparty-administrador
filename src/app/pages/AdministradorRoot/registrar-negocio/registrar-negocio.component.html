@@ -32,7 +32,7 @@
                     <div *ngIf="form.status == 'PENDING'" class="alert alert-warning mt-1">
                       Verificando el nombre
                     </div>
-                    <div *ngIf="form.controls['nombre'].errors?.existe && form.controls['nombre'].touched" class="alert alert-danger mt-1">
+                    <div *ngIf="form.controls['nombre'].errors?.existe" class="alert alert-danger mt-1">
                       Este nombre ya existe
                     </div>
                     <div *ngIf="!form.controls['nombre'].errors?.existe

@@ -94,10 +94,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let root of roots;">
+                    <tr *ngFor="let root of roots; let i = index">
                       <td>{{root.email}}</td>
                       <td>
-                        <button  class="badge badge-danger" > Eliminar </button>
+                        <button (click)="eliminarUsuario(root.id, root.email, i)" class="badge badge-danger" > Eliminar </button>
                       </td>
                     </tr>
                     </tbody>

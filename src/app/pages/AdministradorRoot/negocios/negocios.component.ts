@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ApiServices} from '../../../services/api.services';
 import {Router} from '@angular/router';
 import {ApiRootServices} from '../../../services/api-Root.services';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-negocios',
@@ -20,13 +21,19 @@ export class NegociosComponent implements OnInit {
 
     this.apiservice.obtenerNegocios().subscribe( (resp: any) => {
       this.negocios = resp.data;
-      console.log(this.negocios);
+    }, (error) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en la conexion',
+        showConfirmButton: false,
+        timer: 1500
+      });
     });
-
   }
 
   ngOnInit() {
   }
+
   informacionNegocio(idnegocio: any) {
     this.router.navigateByUrl('administrador/negocio/informacion');
   }

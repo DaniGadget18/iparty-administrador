@@ -18,6 +18,7 @@ export class RegistrarNegocioComponent implements OnInit {
   negocio = new NegocioModel();
   usuario = new UsuarioModel();
   form: FormGroup;
+  nombre: string;
 
 
   constructor( private apiservices: ApiRootServices) {
@@ -62,7 +63,7 @@ export class RegistrarNegocioComponent implements OnInit {
         console.log(error.error);
         Swal.fire({
           icon: 'error',
-          title: error.error.error,
+          title: error.error.message,
           showConfirmButton: false,
           timer: 1500
         });
@@ -72,29 +73,34 @@ export class RegistrarNegocioComponent implements OnInit {
 
   existeNegocio( control: FormControl ): Promise<any> | Observable<any> {
     console.log(control);
-    let nombre;
     this.apiservices.existeNegocio(control.value).subscribe( async (resp: any) => {
+      console.log(resp);
       if (resp.data == null) {
-        nombre = '';
+        this.nombre = '';
       } else {
-        nombre = await resp.data.nombre;
+        this.nombre = await resp.data.nombre;
       }
+    }, (error) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en la conexion',
+        showConfirmButton: false,
+        timer: 1500
+      });
     });
-
     const promesa = new Promise(
       (resolve, reject) => {
         setTimeout(() => {
-          if (control.value === nombre) {
+          if (control.value.toLowerCase() === this.nombre.toLowerCase()) {
             resolve( {
               existe: true
             });
           } else {
             resolve( null);
           }
-        }, 3000);
+        }, 5000);
       }
     );
     return promesa;
-
   }
 }

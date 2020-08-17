@@ -10,18 +10,30 @@ import {Menu} from '../../../models/menu.model';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-
+  lastPage: number;
+  nowPage: number;
+  total: number;
+  perPage: number;
   menu: Menu[] = [];
-  isLoading: boolean = true;
+  isLoading = true;
 
   constructor( private apiservice: ApiServices,
                private router: Router) {
-    this.apiservice.obtenerMenuNegocio().subscribe( (resp: any) => {
-      this.menu = resp.data[0]["menu"];
+    this.apiservice.obtenerMenuNegocio(1).subscribe( (resp: any) => {
+      this.menu = resp.data.data;
+      this.lastPage = resp.data.lastPage;
+      this.nowPage = resp.data.page;
+      this.total = resp.data.total;
+      this.perPage = resp.data.perPage;
       this.isLoading = false;
     }, (error) => {
       this.isLoading = false;
-      console.log(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en la conexion',
+        showConfirmButton: false,
+        timer: 1500
+      });
     });
   }
 
@@ -61,9 +73,28 @@ export class MenuComponent implements OnInit {
         });
       }
     });
+  }
 
-
-
+  changePage(event) {
+    if (isNaN(event)) {
+      return;
+    }
+    this.apiservice.obtenerMenuNegocio(event).subscribe( (resp: any) => {
+      this.menu = resp.data.data;
+      this.lastPage = resp.data.lastPage;
+      this.nowPage = resp.data.page;
+      this.total = resp.data.total;
+      this.perPage = resp.data.perPage;
+      this.isLoading = false;
+    }, (error) => {
+      this.isLoading = false;
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en la conexion',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    });
   }
 
 }

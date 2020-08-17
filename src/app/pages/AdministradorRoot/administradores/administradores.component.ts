@@ -17,8 +17,14 @@ export class AdministradoresComponent implements OnInit {
 
   constructor( private apiservices: ApiRootServices) {
     this.apiservices.obtenerAdministradores().subscribe( (resp: any) => {
-      console.log(resp);
       this.roots = resp.data;
+    }, (error) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en la conexion',
+        showConfirmButton: false,
+        timer: 1500
+      });
     });
   }
 
@@ -43,14 +49,54 @@ export class AdministradoresComponent implements OnInit {
           timer: 1500
         });
       }, (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: error.error.message,
-          showConfirmButton: false,
-          timer: 1500
-        });
+        if (error.error.type === 'token') {
+          Swal.fire({
+            icon: 'error',
+            title: error.error.message,
+            showConfirmButton: false,
+            timer: 1500
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: error.error.message,
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
       });
     }
+  }
+
+  eliminarUsuario( id: number, email: string, idx: number ) {
+    Swal.fire({
+      title: '¿Estas seguro?',
+      text: "Se eliminara el usuario: " + email,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Si, eliminar'
+    }).then((result) => {
+      if (result.value) {
+        this.apiservices.eliminarUsuario(id).subscribe( (resp: any) => {
+          Swal.fire(
+            'Eliminado',
+            'Se a eliminado correctamente',
+            'success'
+          );
+          this.roots.splice(idx, 1);
+        }, (error) => {
+          console.log(error);
+          Swal.fire(
+            'Ocurrio un error!',
+            error.error.message,
+            'error'
+          );
+        });
+      }
+    });
   }
 
 }

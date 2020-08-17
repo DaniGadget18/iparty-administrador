@@ -1,7 +1,8 @@
 {
-  "name": "Purple_angular_free",
+  "name": "iParty",
   "version": "3.0.0",
   "scripts": {
+    "prod": "http-server ./dist -p 4200",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -30,6 +31,7 @@
     "chart.js": "^2.8.0",
     "compass-mixins": "^0.12.10",
     "firebase": ">= 5.5.7 <8",
+    "http-server": "^0.12.3",
     "jquery": "^3.4.1",
     "ng2-charts": "^2.3.0",
     "node-sass": "^4.13.1",

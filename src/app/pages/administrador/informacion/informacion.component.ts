@@ -7,6 +7,7 @@ import {ApiServices} from '../../../services/api.services';
 import {UsuarioModel} from '../../../models/usuario.model';
 import { MouseEvent } from '@agm/core';
 import Swal from 'sweetalert2';
+import {Categoria} from '../../../interfaces/categoria.interface';
 
 @Component({
   selector: 'app-informacion',
@@ -19,11 +20,16 @@ export class InformacionComponent implements OnInit {
   lng = -103.3950567411292;
   usuario = new UsuarioModel();
   negocio = new NegocioModel();
+  categorias: Categoria[] = [];
   isLoading = true;
 
 
   constructor( private apiservices: ApiServices ) {
     this.usuario.email = localStorage.getItem('email');
+    this.apiservices.obtenerCategorias().subscribe( (resp: Categoria[]) => {
+      // @ts-ignore
+      this.categorias = resp.data;
+    });
     this.apiservices.obtenerInfoNegocio(this.usuario).subscribe( (resp: Negocio) => {
       this.negocio.nombre = resp.data[0].nombre;
       this.negocio.ubicacion = resp.data[0].ubicacion;
@@ -35,7 +41,12 @@ export class InformacionComponent implements OnInit {
       this.lat = resp.data[0].lat;
       this.isLoading = false;
     }, (error) => {
-      console.log(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en la conexion',
+        showConfirmButton: false,
+        timer: 1500
+      });
     });
   }
 

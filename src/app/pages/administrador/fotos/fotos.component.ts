@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 
 import {finalize} from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-fotos',
@@ -18,11 +19,18 @@ export class FotosComponent implements OnInit {
 
   fotos: Foto [] = [];
   archivos: FotoModel[] = [];
-  underDrop: boolean = false;
+  underDrop = false;
   constructor( private apiservices: ApiFotosServices,
                private storage: AngularFireStorage) {
-    this.apiservices.obtenerFotosNegocio().subscribe( (resp: Foto) => {
-      this.fotos = resp.data[0]['fotos'];
+    this.apiservices.obtenerFotosNegocio().subscribe( (resp: any) => {
+      this.fotos = resp.data;
+    }, (error) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en la conexion',
+        showConfirmButton: false,
+        timer: 1500
+      });
     });
   }
 
@@ -60,4 +68,34 @@ export class FotosComponent implements OnInit {
     this.archivos = [];
   }
 
+  eliminarFoto( id: number ) {
+    console.log(id);
+      Swal.fire({
+        title: '¿Estas seguro?',
+        text: "Vas a eliminar esta foto",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'No',
+        confirmButtonText: 'Si, borrar',
+      }).then((result) => {
+        if (result.value) {
+          this.apiservices.eliminarFotoNegocio(id).subscribe( (resp: any) => {
+            Swal.fire(
+              'Eliminador',
+              'Esta foto / imagen fue eliminada',
+              'success'
+            );
+          }, (error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Ocurrio un problema',
+              showConfirmButton: false,
+              timer: 1500
+            });
+          });
+        }
+      });
+  }
 }

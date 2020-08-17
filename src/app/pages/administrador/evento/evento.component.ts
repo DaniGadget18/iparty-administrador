@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiServices} from '../../../services/api.services';
 import Swal from 'sweetalert2';
+import {Evento} from '../../../models/evento.model';
 
 @Component({
   selector: 'app-evento',
@@ -8,15 +9,20 @@ import Swal from 'sweetalert2';
   styleUrls: ['./evento.component.scss']
 })
 export class EventoComponent implements OnInit {
-  eventos: any [] = [];
-  fecha: any;
-  isLoading: boolean = true;
+  eventos: Evento [] = [];
+  fecha: Date;
+  isLoading = true;
   constructor( private apiservices: ApiServices ) {
     this.apiservices.obtenerEventos().subscribe( (resp: any) => {
       this.eventos = resp.data;
       this.isLoading = false;
     }, (error) => {
-      console.log(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en la conexion',
+        showConfirmButton: false,
+        timer: 1500
+      });
     });
   }
 

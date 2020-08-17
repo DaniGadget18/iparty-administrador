@@ -5,3 +5,10 @@ export class EventoModel {
   informacion: string;
   foto: string;
 }
+
+export interface Evento {
+  id?: number;
+  foto: string;
+  nombre: string;
+  fecha: string;
+}
