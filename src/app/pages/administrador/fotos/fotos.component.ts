@@ -68,9 +68,9 @@ export class FotosComponent implements OnInit {
     this.archivos = [];
   }
 
-  eliminarFoto( id: number ) {
+  eliminarFoto( id: number, idx: number ) {
     console.log(id);
-      Swal.fire({
+    Swal.fire({
         title: '¿Estas seguro?',
         text: "Vas a eliminar esta foto",
         icon: 'warning',
@@ -87,6 +87,7 @@ export class FotosComponent implements OnInit {
               'Esta foto / imagen fue eliminada',
               'success'
             );
+            this.fotos.splice(idx, 1);
           }, (error) => {
             Swal.fire({
               icon: 'error',

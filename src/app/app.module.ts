@@ -52,6 +52,10 @@ import {ChatService} from './services/chat.services';
 import { FormEventoComponent } from './pages/administrador/form-evento/form-evento.component';
 import {Error500Component} from './error-pages/error500/error500.component';
 import {Error404Component} from './error-pages/error404/error404.component';
+import { ComplementosComponent } from './pages/AdministradorRoot/complementos/complementos.component';
+import { UsuarioComponent } from './pages/administrador/usuario/usuario.component';
+import { VerficarCodigoComponent } from './pages/verficar-codigo/verficar-codigo.component';
+import { CambioPasswordComponent } from './pages/cambio-password/cambio-password.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +86,11 @@ import {Error404Component} from './error-pages/error404/error404.component';
     RegistarMenuComponent,
     FormEventoComponent,
     Error500Component,
-    Error404Component
+    Error404Component,
+    ComplementosComponent,
+    UsuarioComponent,
+    VerficarCodigoComponent,
+    CambioPasswordComponent
   ],
   imports: [
     BrowserModule,

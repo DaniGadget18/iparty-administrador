@@ -15,6 +15,7 @@ export class SidebarComponent implements OnInit {
   registrarNegocio: boolean;
   administradores: boolean;
   negocios: boolean;
+  complementos: boolean;
 
   // Administrador negocio
   dashboard: boolean;
@@ -41,6 +42,7 @@ export class SidebarComponent implements OnInit {
         this.registrarNegocio = true;
         this.administradores = true;
         this.negocios = true;
+        this.complementos = true;
       }
     });
 

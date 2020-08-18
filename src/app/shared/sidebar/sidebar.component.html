@@ -29,6 +29,7 @@
           <li class="nav-item"> <a class="nav-link" routerLink="/informacion" routerLinkActive="active">Informacion</a></li>
           <li class="nav-item"> <a class="nav-link" routerLink="/horarios" routerLinkActive="active">Horarios</a></li>
           <li class="nav-item"> <a class="nav-link" routerLink="/fotos" routerLinkActive="active">Fotos</a></li>
+          <li class="nav-item"> <a class="nav-link" routerLink="/usuario/informacion" routerLinkActive="active">Informacion usuario</a></li>
         </ul>
       </div>
     </li>
@@ -78,6 +79,12 @@
       <a class="nav-link" routerLink="/administrador/administradores">
         <span class="menu-title">Administradores Iparty</span>
         <i class="mdi mdi-account-key menu-icon"></i>
+      </a>
+    </li>
+    <li *ngIf="complementos" class="nav-item" routerLinkActive="active">
+      <a class="nav-link" routerLink="/administrador/complementos">
+        <span class="menu-title">Complementos</span>
+        <i class="mdi mdi-equal-box menu-icon"></i>
       </a>
     </li>
   </ul>

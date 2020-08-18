@@ -21,6 +21,10 @@ import {AuthGuard} from './guards/auth.guard';
 import {Error404Component} from './error-pages/error404/error404.component';
 import {Error500Component} from './error-pages/error500/error500.component';
 import {LoginGuard} from './guards/login.guard';
+import {ComplementosComponent} from './pages/AdministradorRoot/complementos/complementos.component';
+import {UsuarioComponent} from './pages/administrador/usuario/usuario.component';
+import {VerficarCodigoComponent} from './pages/verficar-codigo/verficar-codigo.component';
+import {CambioPasswordComponent} from './pages/cambio-password/cambio-password.component';
 
 
 const routes: Routes = [
@@ -29,10 +33,13 @@ const routes: Routes = [
   { path: '505', component: Error500Component },
   { path: 'login', component: LoginComponent, canActivate: [ LoginGuard ] },
   { path: 'forgetpassword', component: ForgetpasswordComponent },
+  { path: 'verificar', component: VerficarCodigoComponent },
+  { path: 'cambioPassword', component: CambioPasswordComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
   { path: 'informacion', component: InformacionComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
   { path: 'horarios', component: HorariosComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
   { path: 'fotos', component: FotosComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
+  { path: 'usuario/informacion', component: UsuarioComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
   { path: 'menu', component: MenuComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
   { path: 'menu/registrar', component: RegistarMenuComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
   { path: 'menu/registrar/:id', component: RegistarMenuComponent, canActivate: [ AuthGuard ], data: { role: 'admin' } },
@@ -48,6 +55,7 @@ const routes: Routes = [
   { path: 'administrador/registrarnegocio', component: RegistrarNegocioComponent, canActivate: [ AuthGuard ], data: { role: 'root' } },
   { path: 'administrador/administradores', component: AdministradoresComponent, canActivate: [ AuthGuard ], data: { role: 'root' } },
   { path: 'administrador/negocio/informacion/:id', component: InformacionNegocioComponent, canActivate: [AuthGuard], data: { role: 'root' } },
+  { path: 'administrador/complementos', component: ComplementosComponent, canActivate: [AuthGuard], data: { role: 'root' } },
   //{ path: 'dashboard', component: DashboardComponent },
   //{ path: 'basic-ui', loadChildren: () => import('./basic-ui/basic-ui.module').then(m => m.BasicUiModule) },
   //{ path: 'charts', loadChildren: () => import('./charts/charts.module').then(m => m.ChartsDemoModule) },

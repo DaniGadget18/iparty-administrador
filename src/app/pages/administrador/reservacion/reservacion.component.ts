@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ApiServices} from '../../../services/api.services';
 import {ChatService} from '../../../services/chat.services';
 import {Reservacion} from '../../../models/reservacion.model';
 import Swal from 'sweetalert2';
+import {error} from '@angular/compiler/src/util';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-reservacion',
@@ -11,6 +13,9 @@ import Swal from 'sweetalert2';
 })
 export class ReservacionComponent implements OnInit {
 
+  nombre: string;
+  fecha: string;
+
   reservaciones: Reservacion[] = [];
   lastPage: number;
   nowPage: number;
@@ -18,8 +23,8 @@ export class ReservacionComponent implements OnInit {
   perPage: number;
   isLoading = true;
 
-  constructor( private apiservices: ApiServices, private chatservices: ChatService ) {
-    this.apiservices.obtenerReservaciones(1).subscribe( (resp: any) => {
+  constructor(private apiservices: ApiServices, private chatservices: ChatService) {
+    this.apiservices.obtenerReservaciones(1).subscribe((resp: any) => {
       this.reservaciones = resp.data.data;
       this.lastPage = resp.data.lastPage;
       this.nowPage = resp.data.page;
@@ -36,7 +41,7 @@ export class ReservacionComponent implements OnInit {
       });
     });
 
-    this.chatservices.obtenerReservacion().subscribe( (resp: any) => {
+    this.chatservices.obtenerReservacion().subscribe((resp: any) => {
       const data: Reservacion = {
         dia: resp.dia,
         confirmacion: resp.confirmacion,
@@ -57,13 +62,24 @@ export class ReservacionComponent implements OnInit {
     if (isNaN(event)) {
       return;
     }
-    this.apiservices.obtenerReservaciones(event).subscribe( (resp: any) => {
+    this.apiservices.obtenerReservaciones(event).subscribe((resp: any) => {
       this.reservaciones = resp.data.data;
       this.lastPage = resp.data.lastPage;
       this.nowPage = resp.data.page;
       this.total = resp.data.total;
       this.perPage = resp.data.perPage;
     });
-}
+  }
+
+  buscarReservacion( form: NgForm) {
+    this.apiservices.buscarReservaciones(form.value.nombre, this.fecha).subscribe( (resp: any) => {
+      this.reservaciones = resp.data;
+    },(error) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Ocurrio un problema',
+      });
+    });
+  }
 
 }

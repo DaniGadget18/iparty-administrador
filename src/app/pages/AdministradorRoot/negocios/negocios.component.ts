@@ -20,8 +20,10 @@ export class NegociosComponent implements OnInit {
     this.fondo.style.background = '#f2edf3';
 
     this.apiservice.obtenerNegocios().subscribe( (resp: any) => {
+      console.log(resp);
       this.negocios = resp.data;
     }, (error) => {
+      console.log(error);
       Swal.fire({
         icon: 'error',
         title: 'Error en la conexion',

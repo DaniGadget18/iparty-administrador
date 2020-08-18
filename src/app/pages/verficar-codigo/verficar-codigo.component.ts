@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiServices} from '../../services/api.services';
-import {NgForm} from '@angular/forms';
 
 @Component({
-  selector: 'app-forgetpassword',
-  templateUrl: './forgetpassword.component.html',
-  styleUrls: ['./forgetpassword.component.scss']
+  selector: 'app-verficar-codigo',
+  templateUrl: './verficar-codigo.component.html',
+  styleUrls: ['./verficar-codigo.component.scss']
 })
-export class ForgetpasswordComponent implements OnInit {
+export class VerficarCodigoComponent implements OnInit {
+  codigo: string;
   email: string;
   intro: HTMLElement;
   wrapper: HTMLElement;
@@ -21,14 +21,12 @@ export class ForgetpasswordComponent implements OnInit {
   ngOnInit() {
   }
 
-  recuperarPassword( form: NgForm ) {
-    if (!form.valid) {
-      return;
-    }
-    this.apiservices.enviarEmail(this.email).subscribe( (resp: any) => {
+  verificarCodigo() {
+    this.apiservices.verificarCodigo(this.email, this.codigo).subscribe( (resp: any) => {
       console.log(resp);
     }, (error) => {
       console.log(error);
     });
   }
+
 }

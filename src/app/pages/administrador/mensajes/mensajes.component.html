@@ -12,63 +12,6 @@
       <div class="card-body">
         <div class="row">
           <div class="col-12">
-            <div class="messaging">
-              <div class="inbox_msg">
-                <div class="inbox_people">
-                  <div class="headind_srch">
-                    <div class="recent_heading">
-                      <h4>Recientes</h4>
-                    </div>
-                    <div class="content-search">
-                      <label for="search" class="sr-only">Password</label>
-                      <input type="text" class="form-search-msj" id="search" placeholder="Buscar persona">
-                    </div>
-                  </div>
-                  <div class="inbox_chat">
-                    <div (click)="mostrarConversacion(conversacion._id, i)" class="chat_list" *ngFor="let conversacion of conversaciones; let i = index" [ngClass]="{ 'active_chat': indexchat == i }">
-                      <div class="chat_people">
-                        <div class="chat_img"><img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
-                        </div>
-                        <div class="chat_ib">
-                          <h5> {{conversacion.last['nombre']}} <span
-                            class="chat_date">{{conversacion.last['createdAt'] | date : 'short'}}</span></h5>
-                          <p>{{conversacion.last['mensaje']}}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="mesgs" *ngIf="idChat != undefined" id="panelchat">
-                  <div *ngFor="let chat of chats" class="msg_history" >
-                    <div *ngIf="chat.from != idadministrador" class="incoming_msg">
-                      <div class="incoming_msg_img"><img src="https://ptetutorials.com/images/user-profile.png"
-                                                         alt="sunil"></div>
-                      <div class="received_msg">
-                        <div class="received_withd_msg">
-                          <p>{{chat.mensaje}}</p>
-                          <span class="time_date"> {{chat.createdAt | date: 'short'}}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div *ngIf="chat.from == idadministrador" class="outgoing_msg">
-                      <div class="sent_msg">
-                        <p>{{chat.mensaje}}</p>
-                        <span class="time_date"> {{chat.createdAt | date: 'short'}}</span></div>
-                    </div>
-                  </div>
-                  <div class="type_msg" *ngIf="chats.length > 0">
-                    <div class="input-group">
-                      <input [(ngModel)]="mensaje" name="mensaje" id="mensaje" type="text" class="form-control" placeholder="Escribe un mensaje">
-                      <button (click)="enviarMensaje()" class="msg_send_btn">
-                        <i class="mdi mdi-send"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12">
             <div class="row">
               <div class="col-5">
                 <div class="conversacion-window">

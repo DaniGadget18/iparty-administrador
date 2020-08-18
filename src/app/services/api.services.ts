@@ -5,16 +5,135 @@ import {UsuarioModel} from '../models/usuario.model';
 import {NegocioModel} from '../models/negocio.model';
 import {HorarioModel} from '../models/horario.model';
 import {MenuModel} from '../models/menu.model';
-import {EventoModel} from '../models/evento.model';
+import {Evento, EventoModel} from '../models/evento.model';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
+import {map} from 'rxjs/operators';
 
 
 @Injectable()
 export class ApiServices {
 
+  public totalComentarios: number;
+  public reservacionesDia: number;
+  public promedioRanking: number;
+
+  // grafica barras
+  public numeroComentarios: any [] = [];
+  public calificaciones: any [] = [];
+
+  // grafica ultimos 7 dias
+  public fechas: any [] = [];
+  public reservaciones: any [] = [];
+
+  //eventos proxumos
+  public eventos: Evento[] = [];
+
   constructor(private httpclient: HttpClient) {
   }
+
+  obtenerTotalComentarios() {
+    const data = {
+      email: localStorage.getItem('email')
+    };
+    const header = {
+      Authorization: environment.token
+    };
+    return this.httpclient.post(`${environment.url.api}/negocio/totalComentarios`, data, {headers: header})
+      .pipe( map( (resp: number) => {
+        // @ts-ignore
+        this.totalComentarios = resp.data[0].total;
+      }));
+  }
+
+  obtenerReservacionesDia() {
+    const data = {
+      email: localStorage.getItem('email')
+    };
+    const header = {
+      Authorization: environment.token
+    };
+    return this.httpclient.post(`${environment.url.api}/negocio/reservacionesDia`, data, {headers: header})
+      .pipe( map( (resp: number) => {
+        // @ts-ignore
+        this.reservacionesDia = resp.data[0].total;
+      }));
+  }
+
+  obtenerPromedioRanking() {
+    const data = {
+      email: localStorage.getItem('email')
+    };
+    const header = {
+      Authorization: environment.token
+    };
+    return this.httpclient.post(`${environment.url.api}/negocio/promedioPopu`, data, {headers: header})
+      .pipe( map( (resp: number) => {
+        // @ts-ignore
+        this.promedioRanking = resp.data[0].popularidad;
+      }));
+  }
+
+  obtenerComentariosPorRanking() {
+    const data = {
+      email: localStorage.getItem('email')
+    };
+    const header = {
+      Authorization: environment.token
+    };
+    return this.httpclient.post(`${environment.url.api}/negocio/comentariosPorEstrellas`, data, {headers: header})
+      .pipe( map( (resp: number) => {
+        // @ts-ignore
+        for (const calificacion of resp.data) {
+          const hasCalificacion = this.calificaciones.find( element => element === calificacion.calificacion);
+          if (hasCalificacion) {
+            return;
+          }
+          this.calificaciones.push(calificacion.calificacion);
+          this.numeroComentarios.push(calificacion.total);
+        }
+      }));
+  }
+
+  obtenerReservaciones7dias() {
+    const data = {
+      email: localStorage.getItem('email')
+    };
+    const header = {
+      Authorization: environment.token
+    };
+    return this.httpclient.post(`${environment.url.api}/negocio/reservacionesDiaSemana`, data, {headers: header})
+      .pipe( map( (resp: number) => {
+        // @ts-ignore
+        if (this.reservaciones.length === 0) {
+          // @ts-ignore
+          for (const reservacion of resp.data) {
+            const conversion = new Date(reservacion.dia);
+            const nueva = conversion.toLocaleDateString();
+            this.fechas.push(nueva);
+            this.reservaciones.push(reservacion.total);
+          }
+        }
+      }));
+  }
+
+  obtenerEventosProximos() {
+    const data = {
+      email: localStorage.getItem('email')
+    };
+    const header = {
+      Authorization: environment.token
+    };
+    return this.httpclient.post(`${environment.url.api}/negocio/eventosProximos`, data, {headers: header})
+      .pipe( map( (resp: number) => {
+        // @ts-ignore
+        this.eventos = resp.data;
+      }));
+  }
+
+
+
+  // termina dashboard
 
   obtenerInfoNegocio(usuario: UsuarioModel) {
     const data = {
@@ -30,7 +149,7 @@ export class ApiServices {
     const header = {
       Authorization: environment.token
     };
-    return this.httpclient.get(`${environment.url.api}/negocio/Categorias`, {headers: header});
+    return this.httpclient.get(`${environment.url.root}/Categorias`, {headers: header});
   }
 
   actualizarNegocio(negocio: NegocioModel) {
@@ -42,7 +161,7 @@ export class ApiServices {
       informacion: negocio.informacion,
       lat: negocio.lat,
       lng: negocio.lng,
-      foto: null
+      foto: negocio.foto
     };
     const header = {
       Authorization: environment.token
@@ -77,7 +196,7 @@ export class ApiServices {
     const header = {
       Authorization: environment.token
     };
-    return this.httpclient.get(`${environment.url.api}/negocio/getAllCategorias`, {headers: header});
+    return this.httpclient.get(`${environment.url.root}/getAllCategorias`, {headers: header});
   }
 
   obtenerMenuid(id: number) {
@@ -216,4 +335,57 @@ export class ApiServices {
   }
 
 
+  obtenerInformacionUsuario() {
+    const data = {
+      email: localStorage.getItem('email'),
+    };
+    const header = {
+      Authorization: environment.token
+    };
+    return this.httpclient.post(`${environment.url.api}/usuario/informacion`, data, {headers: header});
+  }
+
+
+  editarUsuario( usuario: UsuarioModel ) {
+    const data = {
+      ...usuario
+    };
+    const header = {
+      Authorization: environment.token
+    };
+    return this.httpclient.post(`${environment.url.api}/usuario/update`, data, {headers: header});
+  }
+
+  buscarReservaciones(nombre: string, fecha: string) {
+    let data = {};
+    if (nombre) {
+      data = {
+        data: nombre
+      };
+    } else {
+       data = {
+        data: fecha
+      };
+    }
+    const header = {
+      Authorization: environment.token
+    };
+    console.log(data);
+    return this.httpclient.post(`${environment.url.api}/negocio/buscarReservacion`, data, {headers: header});
+  }
+
+  enviarEmail( email: string ) {
+    const data = {
+      email
+    };
+    return this.httpclient.post(`${environment.url.api}/recuperacion`, data);
+  }
+
+  verificarCodigo( email: string, codigo: string) {
+    const data = {
+      email,
+      codigo
+    };
+    return this.httpclient.post(`${environment.url.api}/validacioncodigo`, data);
+  }
 }

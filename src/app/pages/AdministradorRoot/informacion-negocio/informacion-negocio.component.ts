@@ -11,13 +11,14 @@ import {ApiRootServices} from '../../../services/api-Root.services';
 export class InformacionNegocioComponent implements OnInit {
 
   informacion: any [] = [];
-
+  usuario: any [] = [];
   id: any;
   constructor( private apiservices: ApiRootServices,
                private activedrouter: ActivatedRoute) {
     this.id = activedrouter.snapshot.params.id;
     this.apiservices.obtenerInfoNegocioRoot(this.id).subscribe( (resp: any) => {
       this.informacion = resp.data[0];
+      this.usuario = resp.data[0].usuario;
     });
 
   }

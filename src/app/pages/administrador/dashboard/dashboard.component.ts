@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ChatService} from '../../../services/chat.services';
+import {ApiServices} from '../../../services/api.services';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,9 +11,18 @@ export class DashboardComponent implements OnInit {
 
 
   fondo: HTMLElement;
-  constructor( private apichatservices: ChatService ) {
+  constructor( public apiservices: ApiServices ) {
     this.fondo = document.getElementById('body');
     this.fondo.style.background = '#f2edf3';
+    this.apiservices.obtenerTotalComentarios().subscribe();
+    this.apiservices.obtenerReservacionesDia().subscribe();
+    this.apiservices.obtenerPromedioRanking().subscribe();
+    setTimeout( () => {
+      console.log('entro');
+      this.apiservices.obtenerComentariosPorRanking().subscribe();
+      this.apiservices.obtenerReservaciones7dias().subscribe();
+    }, 20);
+    this.apiservices.obtenerEventosProximos().subscribe();
   }
 
   ngOnInit() {
@@ -133,14 +143,62 @@ export class DashboardComponent implements OnInit {
     },
   ];
 
+  barChartData = [{
+    label: 'Comentarios por ranking',
+    data: this.apiservices.numeroComentarios,
+    borderWidth: 1,
+    fill: false
+  }];
+
+  barChartLabels = this.apiservices.calificaciones;
+
+  barChartOptions = {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    },
+    legend: {
+      display: false
+    },
+    elements: {
+      point: {
+        radius: 0
+      }
+    }
+  };
+
+  barChartColors = [
+    {
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+      ]
+    }
+  ];
+
   areaChartData = [{
     label: '# of Votes',
-    data: [10, 19, 3, 5, 2, 3],
+    data: this.apiservices.reservaciones,
     borderWidth: 1,
     fill: true
   }];
 
-  areaChartLabels = ["2013", "2014", "2014", "2015", "2016", "2017"];
+  areaChartLabels = this.apiservices.fechas;
 
   areaChartOptions = {};
 
@@ -150,5 +208,6 @@ export class DashboardComponent implements OnInit {
       backgroundColor: 'rgba(255,99,132,.2)'
     }
   ];
+
 
 }

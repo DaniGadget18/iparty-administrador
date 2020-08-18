@@ -86,7 +86,7 @@ export class ChatService {
     const data = {
       idnegocio
     };
-    return this.http.post(`${environment.url.socket}/api/getConversationNegocio`, data);
+    return this.http.post(`${environment.url.apiSocket}/api/getConversationNegocio`, data);
   }
 
   obtenerChatnuevo(conversacion: string) {
@@ -94,7 +94,7 @@ export class ChatService {
       idnegocio: this.idnegocio.toString(),
       conversacion
     };
-    return this.http.post(`${environment.url.socket}/api/getchat`, data)
+    return this.http.post(`${environment.url.apiSocket}/api/getchat`, data)
       .pipe(map((resp: MensajeInterfaceResp[]) => {
         console.log(resp);
         this.chat = [];
@@ -112,7 +112,7 @@ export class ChatService {
       conversacion: iduser
     };
 
-    return this.http.post(`${environment.url.socket}/api/getchat`, data);
+    return this.http.post(`${environment.url.apiSocket}/api/getchat`, data);
   }
 
   obtenerAdminRoom() {

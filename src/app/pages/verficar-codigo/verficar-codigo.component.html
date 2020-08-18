@@ -1,0 +1,27 @@
+<section class="body-login" style="overflow-y:hidden;">
+  <div class="d-flex align-items-center auth px-0 mt-5" >
+    <div class="row w-100 mx-0">
+      <div class="col-lg-6 mx-auto">
+        <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+          <div class="brand-logo text-center">
+            <img src="assets/img/LOGO.png"  style="width: 10%" alt="logo">
+          </div>
+          <h4>Ingresa el codigo que recibiste en tu correo</h4>
+          <form (ngSubmit)="verificarCodigo()" >
+            <div class="form-group">
+              <input type="text"
+                     class="form-control form-control-lg"
+                     id="codigo"
+                     name="codigo"
+                     placeholder="codigo"
+                     required>
+            </div>
+            <div class="mt-3">
+              <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Verificar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

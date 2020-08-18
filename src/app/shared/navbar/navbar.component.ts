@@ -3,6 +3,7 @@ import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import {ChatService} from '../../services/chat.services';
 import {AuthApiServices} from '../../services/auth.services';
 import {Router} from '@angular/router';
+import {ApiServices} from '../../services/api.services';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +18,8 @@ export class NavbarComponent implements OnInit {
   constructor(config: NgbDropdownConfig,
               private chatservices: ChatService,
               private authservices: AuthApiServices,
-              private router: Router) {
+              private router: Router,
+              private apiservices: ApiServices) {
     config.placement = 'bottom-right';
 
     this.chatservices.getMessages().subscribe( (resp: any) => {
@@ -65,6 +67,10 @@ export class NavbarComponent implements OnInit {
   }
 
   logOut() {
+    this.apiservices.fechas = [];
+    this.apiservices.reservaciones = [];
+    this.apiservices.numeroComentarios = [];
+    this.apiservices.calificaciones = [];
     this.router.navigate(['/login']);
     this.authservices.logOut();
   }

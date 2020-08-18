@@ -18,7 +18,7 @@
                 <th>Nombre</th>
                 <th>Administrador</th>
                 <th>Detalles</th>
-                <th>Accion</th>
+                <!--<th>Accion</th>-->
               </tr>
               </thead>
               <tbody>
@@ -26,7 +26,6 @@
                 <td>{{ negocio.nombre }}</td>
                 <td>{{ negocio.usuario[0].email || null }}</td>
                 <td><button class="badge badge-warning" [routerLink]="['/administrador/negocio/informacion', negocio.id]">Detalles</button></td>
-                <td><button class="badge badge-danger">Eliminar</button></td>
               </tr>
               </tbody>
             </table>

@@ -22,8 +22,6 @@ export class FormEventoComponent implements OnInit {
   isLoadingFoto: boolean;
   uploadProgress: Observable<number>;
   uploadURL: Observable<string>;
-  archivos: FotoModel[] = [];
-  underDrop: boolean = false;
   fotosubida: any[] = [];
 
   constructor( private _storage: AngularFireStorage, private apiservices: ApiServices,

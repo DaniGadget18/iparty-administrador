@@ -17,9 +17,8 @@ export class MensajesComponent implements OnInit {
   indexchat: number;
   chatpanel: any;
   constructor( public apichatservice: ChatService ) {
+    this.apichatservice.chat = [];
     this.apichatservice.getMessages().subscribe( (resp: any) => {
-      console.log(this.iduser);
-      console.log(resp);
       if (this.iduser == null) {
         return;
       }
@@ -40,11 +39,14 @@ export class MensajesComponent implements OnInit {
   }
 
   enviarMensaje() {
-    console.log(this.mensaje);
     if (this.mensaje.length === 0) {
       return;
     }
     this.apichatservice.EnviarMensaje(this.mensaje, Number(this.iduser));
+    setTimeout( () => {
+      this.elemento.scrollTop = this.elemento.scrollHeight;
+    }, 100 );
+
   }
 
   mostrarConversacionNuevo(iduser: string, idx: number) {

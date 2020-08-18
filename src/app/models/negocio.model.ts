@@ -6,6 +6,7 @@ export class NegocioModel {
   idcategoria: any;
   lat: any;
   lng: any;
+  foto: string;
 }
 
 export interface Negocio {
@@ -17,5 +18,6 @@ export interface Negocio {
     idcategoria: any;
     lat: any;
     lng: any;
+    foto:string;
   };
 }

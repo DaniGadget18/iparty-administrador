@@ -3,7 +3,7 @@
     <span class="page-title-icon bg-gradient-primary text-white mr-2">
       <i class="mdi mdi-domain"></i>
     </span>
-    Informacion - Ritter
+    Informacion - {{ informacion['nombre'] }}
   </h3>
 </div>
 <div class="row">
@@ -23,19 +23,19 @@
                 <h3> Direccion: </h3>
               </div>
               <div class="col-12">
-                <h3> {{informacion['ubicacion'] || 'Null'}} </h3>
+                <h3>  </h3>
               </div>
               <div class="col-6 mt-3">
                 <h3> Categoria: </h3>
               </div>
-              <div class="col-6 mt-3">
-                <h3> {{informacion['categoria_negocio'].categoria || 'Null'}} </h3>
+              <div  class="col-6 mt-3">
+                <h3>  </h3>
               </div>
               <div class="col-6 mt-4">
                 <h3> Administrador: </h3>
               </div>
               <div class="col-12">
-                <h3> {{informacion['usuario'][0].email || 'Null'}} </h3>
+                <h3> {{this.usuario[0]['email']}} </h3>
               </div>
             </div>
           </div>
